@@ -17,7 +17,7 @@ export const ErrorMessage = (status,message)=>{
 
 export const signup = async (req, res, next) => {
   try {
-    console.log("Signup Request Body:", req.body);
+    // console.log("Signup Request Body:", req.body);
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
@@ -25,19 +25,19 @@ export const signup = async (req, res, next) => {
     // Check if the email is already in use
     const existingUserEmail = await User.findOne({ email: req.body.email });
     if (existingUserEmail) {
-      console.log("Email already in use");
+      // console.log("Email already in use");
       return res.status(400).json({ success: false, message: "Email is already in use." });
     }
 
     // Check if the username is already in use
     const existingUsername = await User.findOne({ username: req.body.username });
     if (existingUsername) {
-      console.log("Username already in use");
+      // console.log("Username already in use");
       return res.status(400).json({ success: false, message: "Username is already in use." });
     }
 
     const newUser = await User.create({ ...req.body, password: hash });
-    console.log("New User Created:", newUser);
+    // console.log("New User Created:", newUser);
     if(!newUser)
       {
         res.status(404).json({message:"User can't be created try again"})
@@ -47,7 +47,7 @@ export const signup = async (req, res, next) => {
 
     await newUser.save();
 
-    console.log("Signed Up User:", newUser);
+    // console.log("Signed Up User:", newUser);
     res.status(200).json({ newUser, token });
   } catch (err) {
     console.error("Error during signup:", err);

@@ -8,18 +8,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard/Dashboard';
 import TransactionCard from './components/Cards/TransactionCard.jsx';
 import Dues from "./pages/Dues/Dues"
-import Vault from "./pages/Vault/Vault"
 import Chart from './pages/Chart/Chart';
-import Stocks from './pages/Stocks/Stocks';
 import { Main } from './pages/Groups/Main';
 import ToggleBtn from './components/Navbar/ToggleBtn.jsx';
 import Savings2 from './pages/Savings/Savings2';
 import SimplifyDebt from './pages/Groups/SimplifyDebt.jsx'
 import Grouphome from './pages/Groups/Grouphome.jsx';
-
 import Profile from './pages/Profile/Profile.jsx';
-import Inbox from './pages/Inbox/inbox.jsx';
-
 
 function App() {
 
@@ -73,10 +68,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard user={user}thememode={thememode} toggle={toggle} setUser={setUser}/>} />
           <Route path="/transcard" element={<TransactionCard thememode={thememode} toggle={toggle}/>} />
           <Route path="/dues" element={<Dues user={user}thememode={thememode} toggle={toggle}/>} />
-          <Route path="/vault" element={<Vault user={user} thememode={thememode} toggle={toggle}/>} />
           <Route path="/savings" element={<Savings2 user={user} thememode={thememode} toggle={toggle} />} />
           <Route path="/charts" element={<Chart user={user} setUser={setUser} thememode={thememode} toggle={toggle} />} />
-          <Route path="/stocks" element={<Stocks user={user} thememode={thememode} toggle={toggle}/>} />
           <Route path="/groups" element={<Main user={user} thememode={thememode} toggle={toggle} groupData={groupData} setgroupData={setgroupData} />} />
           <Route path="/billsplit/:id" element={<Grouphome user={user} thememode={thememode} toggle={toggle}/>}/>
           <Route path="/simplifydebt/:id" element={<SimplifyDebt user={user} thememode={thememode} toggle={toggle}/>}/>
@@ -85,8 +78,7 @@ function App() {
           <Route path='/simplify' element={<SimplifyDebt user={user} thememode={thememode} toggle={toggle}/>}/>
           <Route path="/profile" element={<Profile user={user} thememode={thememode} toggle={toggle} setUser={setUser}/>} />
           <Route path="/billsplit" element={<Grouphome user={user} thememode={thememode} toggle={toggle}/>}/>
-          <Route path="/inbox" element={<Inbox user={user} setUser={setUser} thememode={thememode} toggle={toggle}/>} />
-
+          
         </Routes>
       </BrowserRouter>
     </>

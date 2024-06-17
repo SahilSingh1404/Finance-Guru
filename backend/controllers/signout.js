@@ -20,6 +20,6 @@ export const signout = (req, res, next) => {
       res.status(200).json({ message: "Logged out successfully" });
     } catch (err) {
       next(err);
-      console.log(err);
+      // console.log(err);
     }
   };

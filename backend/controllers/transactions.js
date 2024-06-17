@@ -9,7 +9,7 @@ export const ErrorMessage = (status,message)=>{
 
 export const addTransaction = async(req,res)=>{
     const {type,amount,currency,category,desc,date,userId}=req.body
-    console.log(req.body);
+    // console.log(req.body);
     const transaction = Transaction({
         userId,
         type,
@@ -26,9 +26,9 @@ export const addTransaction = async(req,res)=>{
 
     }catch(err){
         res.status(500).json({message:'Server error'})
-        console.log(err)
+        // console.log(err)
     }
-    console.log(transaction)
+    // console.log(transaction)
 }
 
 export const getTransactions=async(req,res)=>{
@@ -46,8 +46,8 @@ export const getTransactions=async(req,res)=>{
 
 export const editTransaction=async(req,res)=>{
     try{
-      console.log(req.body)
-      console.log(req.params.id)
+      // console.log(req.body)
+      // console.log(req.params.id)
         const tran = await Transaction.findById(req.params.id);
         if(!tran){
             return next(createError(404,"Transaction not found"));
@@ -55,7 +55,7 @@ export const editTransaction=async(req,res)=>{
             const newtran = await Transaction.findByIdAndUpdate(req.params.id,{
                 $set:req.body.transInput
             },{new:true});
-            console.log("Updated document:", newtran);
+            // console.log("Updated document:", newtran);
             res.json(newtran)
     }catch(err){
         res.status(400).json("unable to edit transaction");
@@ -73,12 +73,12 @@ export const deleteTransaction=async(req,res)=>{
 
     }catch(err){
         res.status(200).json("unable to delete transaction");
-        console.log(err)
+        // console.log(err)
     }
 }
 
 export const getTransactionsByFilter = async(req,res)=>{
-    console.log(req.body)
+    // console.log(req.body)
     const {userId,category,startDate,endDate} = req.body.filterInput
     try {
         let filter = { userId: userId };
@@ -94,15 +94,15 @@ export const getTransactionsByFilter = async(req,res)=>{
           };
         }
 
-        console.log("filter",filter)
+        // console.log("filter",filter)
         const trans = await Transaction.find(filter)
         .sort({ date: -1 }) // Sort by date in descending order
         .exec();
-        console.log("trans",trans)
+        // console.log("trans",trans)
     
         res.json({ trans });
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(500).json({ message: 'Internal Server Error' });
       }
    
@@ -111,7 +111,7 @@ export const getTransactionsByFilter = async(req,res)=>{
 //correct this api first---->
 export const getTotalStats=async(req,res)=>{
     const userId = req.params.userId
-    console.log("user:",userId)
+    // console.log("user:",userId)
     try{
          // Calculate total income
          const incomeResult = await Transaction.aggregate([
@@ -341,6 +341,6 @@ export const getCategoryWiseTransaction = async(req,res)=>{
     
 
   }catch(err){
-    console.log(err)
+    // console.log(err)
   }
 }

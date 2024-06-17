@@ -2,7 +2,7 @@ import savingSchema from "../models/savings.js"
 
 export const addSaving = async(req,res)=>{
 
-    console.log(req.body)
+    // console.log(req.body)
 
     const saving = savingSchema(
         req.body.saving
@@ -16,16 +16,16 @@ export const addSaving = async(req,res)=>{
     }catch(err){
         res.status(500).json({message:'Server error'})
     }
-    console.log(saving)
+    // console.log(saving)
 
 }
 
 export const getSavings = async(req,res)=>{
     const userId= req.params.userId;
-    console.log("user id is:",req.params.userId)
+    // console.log("user id is:",req.params.userId)
     try{
         const savings = await savingSchema.find({userId:userId})
-        console.log(savings)
+        // console.log(savings)
         res.json({savings})
     }catch(err){
         res.json({message:"No savings found"})
@@ -39,7 +39,7 @@ export const editSaving = async(req,res)=>{
         res.json({message:"saving edited",saving})
     }catch(err){
         res.json({message:"cannot edit the saving/saving not found"})
-        console.log(err)
+        // console.log(err)
     }
 }
 export const deleteSaving = async(req,res)=>{

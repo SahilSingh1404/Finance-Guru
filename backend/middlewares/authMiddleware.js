@@ -20,7 +20,7 @@ export const authmiddleware = async (req, res, next) => {
                 next();
             } catch (error) {
                 // Token verification failed
-                console.log(req.user)
+                // console.log(req.user)
                 res.status(401).json({ message: "Not authorized",error:error });
             }
         } else {

@@ -29,7 +29,7 @@ export const recurringbillemail =async(req,res)=>{
             sendEmail(req.body.reqmail)
         }
     }catch(err){
-        console.log(err)
+        // console.log(err)
     }
     
 }

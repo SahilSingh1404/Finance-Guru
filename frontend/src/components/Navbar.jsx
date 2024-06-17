@@ -12,7 +12,6 @@ import MenuItem from '@mui/material/MenuItem';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import './Navbar.css'
 
@@ -208,51 +207,18 @@ function ResponsiveAppBar({thememode,toggle,setUser,user,setFlag,flag}) {
               >
                 Charts
               </Button>
-              <Button
-                key="Stocks"
-                onClick={()=>{navigate("/stocks")}}
-                sx={{
-                    my: 2,
-            color: thememode === 'dark' ? 'white' : '#000080',
-
-                    display: 'block',
-                    position: 'relative',
-                    '&::after': {
-                      content: '""',
-                      position: 'absolute',
-                      width: '100%',
-                      height: '2px',
-                      backgroundColor: '#000080',
-                      bottom: '-4px', // Adjust this value to move the underline up or down
-                      left: 0,
-                      transform: 'scaleX(0)',
-                      transformOrigin: 'bottom right',
-                      transition: 'transform 0.25s ease-out',
-                    },
-                    '&:hover::after': {
-                      transform: 'scaleX(1)',
-                      transformOrigin: 'bottom left',
-                    },
-                  }}
-              >
-                Stocks
-              </Button>
+              
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
           <LightModeIcon 
           onClick={toggle}
-          sx={{
+          sx={{mx: 2,
             color: thememode === 'dark' ? 'white' : 'inherit',
             cursor: 'pointer'
           }}
           />
-            <MailOutlineIcon sx={{mx: 2,
-            color: thememode === 'dark' ? 'white' : 'inherit',
-            cursor: 'pointer'
-             }}
-             onClick={()=>{navigate("/inbox")}}
-            />
+            
             {/* <Tooltip title=""> */}
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src={navuser?.image || 'ProfileImg.jpeg'} />
@@ -277,9 +243,7 @@ function ResponsiveAppBar({thememode,toggle,setUser,user,setFlag,flag}) {
                 <MenuItem key="Profile" onClick={()=>{navigate("/profile")}}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
-                <MenuItem key="Vault" onClick={()=>{navigate("/vault")}}>
-                  <Typography textAlign="center">Vault</Typography>
-                </MenuItem>
+                
                 <MenuItem key="Logout" onClick={()=>{Logout()}}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>

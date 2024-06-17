@@ -7,7 +7,7 @@ import { validationResult } from "express-validator";
 import nodemailer from "nodemailer";
 import schedule from "node-schedule"
 export function sendstartEmail (recievermail){
-    console.log(recievermail)
+    // console.log(recievermail)
     return new Promise((resolve, reject) => {
       const transporter = nodemailer.createTransport({
         name: 'forwardemail.net',
@@ -56,7 +56,7 @@ export function sendstartEmail (recievermail){
 
       transporter.sendMail(mail_configs, function (error, info) {
         if (error) {
-          console.log(error);
+          // console.log(error);
           return reject({ message: `An error has occured` });
         }
         return resolve({ message: "Email sent succesfuly" });

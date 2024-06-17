@@ -3,7 +3,7 @@ import User from "../models/user.js"
 export const addStock = async (req, res) => {
     const stock = req.body;
     const userId = req.params.userId;
-    console.log(userId, stock);
+    // console.log(userId, stock);
 
     try {
         const user = await User.findById(userId);
@@ -59,7 +59,7 @@ export const deleteStock = async (req, res) => {
         const { userId } = req.params; 
         const stockId = req.body.stockId; 
 
-        console.log("userId",userId,"stock Id",stockId)
+        // console.log("userId",userId,"stock Id",stockId)
         if (!stockId) {
             return res.status(400).json({ message: "Stock ID is required" });
         }
@@ -69,21 +69,21 @@ export const deleteStock = async (req, res) => {
             return res.status(404).json({ message: "Can't find the user of given ID" });
         }
 
-        console.log("User stocks", user.stocks);
+        // console.log("User stocks", user.stocks);
 
         // Filter out the stock to be deleted
         const updatedStocks = user.stocks.filter(stock => stock.input !== stockId);
         user.stocks = updatedStocks;
 
         const updatedUser = await user.save();
-        console.log("Updated stocks", user.stocks);
+        // console.log("Updated stocks", user.stocks);
 
         res.status(200).json({
             user: updatedUser,
             stocks: updatedUser.stocks
         });
     } catch (error) {
-        console.log("Error while deleting the stock", error);
+        // console.log("Error while deleting the stock", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
@@ -92,22 +92,22 @@ export const delUrl=async (req, res) => {
     try {
         const {url} = req.body
         const {userId}=req.params
-        console.log(userId)
+        // console.log(userId)
         const user=await User.findById(userId)
-        console.log("Url frontend",url)
+        // console.log("Url frontend",url)
         const updatedFiles=user.files.filter((file)=>file.url!==url)
-        console.log("updatedFiles",updatedFiles)
+        // console.log("updatedFiles",updatedFiles)
         user.files=updatedFiles
 
         const k=await user.save()
-        console.log(updatedFiles) 
+        // console.log(updatedFiles) 
 
         if(!k)
             {
                 res.status(502).json({message:"Can't save the user "})
             }
     
-        console.log('File successfully deleted.');
+        // console.log('File successfully deleted.');
         return res.send({ message: 'file deleted from firebase storage' ,files:user.files});
     } catch (error) {
         console.error("Error while deleting the file:", error);
@@ -118,7 +118,7 @@ export const delUrl=async (req, res) => {
 export const addUrl = async(req,res)=>{
     const {url,fileName} = req.body
     const userId = req.params.userId
-    console.log(userId,url)
+    // console.log(userId,url)
     try{
         const user = await User.findByIdAndUpdate(
             userId,
@@ -136,7 +136,7 @@ export const addUrl = async(req,res)=>{
 export const addImg = async(req,res)=>{
     const {url} = req.body
     const userId = req.params.userId
-    console.log(userId,url)
+    // console.log(userId,url)
     try{
         const user = await User.findByIdAndUpdate(
             userId,
@@ -164,7 +164,7 @@ export const getInbox = async(req,res)=>{
 export const addBadge=async(req,res)=>{
     const image = req.body.img
     const userId = req.params.id
-    console.log(userId,image)
+    // console.log(userId,image)
     try{
         const user = await User.findByIdAndUpdate(
             userId,
@@ -182,7 +182,7 @@ export const addBadge=async(req,res)=>{
 
 export const getBadges=async(req,res)=>{
     const userId = req.params.id
-    console.log(userId);
+    // console.log(userId);
     try{
         const user = await User.findById(userId)
         const badges = user.badges;

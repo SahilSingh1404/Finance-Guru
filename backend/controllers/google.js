@@ -18,6 +18,6 @@ export const googleAuth = async (req, res, next) => {
         res.status(200).json(savedUser._doc);
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };

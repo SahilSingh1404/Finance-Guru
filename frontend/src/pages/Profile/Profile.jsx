@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import axios from "axios"
-
 import { AiFillEdit } from 'react-icons/ai';
 import { RxCross2 } from "react-icons/rx";
 
@@ -13,9 +12,9 @@ function Profile({ user, thememode, toggle,setUser}) {
   const [url, setUrl] = useState(user.image);
   const [show,setShow]=useState(false)
   const [flag,setFlag]=useState(false)
-  console.log(user)
+  // console.log(user)
 
-  console.log(image)
+  // console.log(image)
 
   React.useEffect(()=>{
     const check=async()=>{

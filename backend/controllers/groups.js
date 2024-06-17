@@ -90,7 +90,7 @@ export const getmembers = async(req,res)=>{
     const groupId= req.params.id;
     // console.log(req.params.userId)
     try{
-        console.log(groupId)
+        // console.log(groupId)
         const groupweneed= await group.findById(groupId)
         const allmembers = groupweneed.members
         const memberDetails = await Promise.all(allmembers.map(async userId => {
@@ -99,7 +99,7 @@ export const getmembers = async(req,res)=>{
           }));
         res.json( memberDetails );
     }catch(err){
-        console.log(err)
+        // console.log(err)
     }
 }
 
@@ -108,7 +108,7 @@ export const splitBill = async (req, res) => {
     const userr=req.body.input.user
     
     const n = groupData.members.length;
-    console.log(req.body)
+    // console.log(req.body)
 
   
     try {
@@ -133,7 +133,7 @@ export const splitBill = async (req, res) => {
   
       res.json(updatedgroup);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -147,7 +147,7 @@ export const markPaid = async (req, res) => {
         const group1 = await group.findById(id);
 
         // Find the index of the user in the billSplit array
-        console.log(group1.billSplit[0])
+        // console.log(group1.billSplit[0])
         const userIndex = group1.billSplit[0].findIndex((mem) => mem.userId === userId);
 
         // If the user is found, update the settled field
@@ -185,11 +185,11 @@ export const markApproved = async (req, res) => {
                 { $set: { 'billSplit.0.$.approved': !currentApprovedValue } }
             );
         }
-        console.log("mark approved api:",group1.billSplit)
+        // console.log("mark approved api:",group1.billSplit)
 
         res.json(group1);
     } catch (err) {
-        console.error(err);
+        // console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
@@ -198,11 +198,11 @@ export const markApproved = async (req, res) => {
 
 export const simplifyDebt = async(req,res)=>{
   const debts = req.body.outputArray
-  console.log("debts",debts)
+  // console.log("debts",debts)
   const id=req.params.id
   try{
     const curgroup = await group.findById(id)
-    console.log("Groupp",curgroup)
+    // console.log("Groupp",curgroup)
     curgroup.simplifyDebt?.map(arr=>{
       if(arr[3]==false){
         let obj={}
@@ -213,9 +213,9 @@ export const simplifyDebt = async(req,res)=>{
         // console.log("obj",obj)
       }
     })
-      console.log("debts after pushing obj",debts)
+      // console.log("debts after pushing obj",debts)
   }catch(err){
-    console.log("Can't fetch group")
+    // console.log("Can't fetch group")
   }
   try{
       const splits = Splitwise(debts);
@@ -226,7 +226,7 @@ export const simplifyDebt = async(req,res)=>{
           {$set:{simplifyDebt:splits}},
           {new:true}
          )
-  console.log(splits);
+  // console.log(splits);
   res.json(splits)
   }catch(err){
       res.json("unable to simplify")
@@ -257,7 +257,7 @@ export const deleteGroup = async (req, res) => {
   
       res.status(200).json({ message: "Group deleted successfully" });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ error: "Unable to delete group" });
     }
   };
@@ -292,7 +292,7 @@ export const approveDebt = async (req, res) => {
   
       res.json(updatedGroup);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -301,10 +301,10 @@ export const approveDebt = async (req, res) => {
     const id=req.params.id
     try{
         const grp = await group.findById(id)
-        console.log(grp)
+        // console.log(grp)
         res.json(grp)
     }catch(err){
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }
@@ -329,7 +329,7 @@ export const addComment = async (req, res) => {
 
       res.status(200).json({ groupp });
   } catch (err) {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -348,7 +348,7 @@ export const getAllComments = async (req, res) => {
 
       res.status(200).json({ commentss });
   } catch (err) {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ error: 'Internal Server Error' });
   }
 };
@@ -357,7 +357,7 @@ export const getAllComments = async (req, res) => {
   export const addFriendsToGroup = async(req,res)=>{
     const id=req.params.id//group id
     const friends = req.body.friends//array of usernames of friends
-    console.log(friends)
+    // console.log(friends)
 
     try{
     const existgroup = await group.findById(id);
@@ -388,7 +388,7 @@ export const getAllComments = async (req, res) => {
     res.status(200).json(updatedGroup);
 
     }catch(err){
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ error: 'Internal Server Error' });
 
     }
