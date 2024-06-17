@@ -66,7 +66,9 @@ const Stocks = ({user,thememode,toggle}) => {
     }
     getStocks()
     console.log(stockData)
-    },[flag])
+    },
+    [flag]
+  )
     console.log(stockData)
 
   return ( 

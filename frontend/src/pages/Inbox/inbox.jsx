@@ -29,7 +29,7 @@ const Inbox = ({ user,setUser,thememode,toggle }) => {
   check()
 
 },
-// [user?._id]
+[user?._id]
 )
 console.log(inboxuser)
 useEffect(() => {

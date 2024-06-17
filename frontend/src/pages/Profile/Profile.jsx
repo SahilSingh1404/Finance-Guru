@@ -33,7 +33,7 @@ function Profile({ user, thememode, toggle,setUser}) {
     }
     check()
   },
-  // [user?._id]
+  [user?._id]
 )
 
 

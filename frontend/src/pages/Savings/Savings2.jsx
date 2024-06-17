@@ -256,7 +256,7 @@ const currenciData = UCurrency(currenci);
     }
     getSavings()
   },
-  // [user._id,updateFlag]
+  [user._id,updateFlag]
 )
 
   const handleDelete = () => {

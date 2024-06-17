@@ -13,7 +13,7 @@ export const  creategroup= async(req,res)=>{
             req.body.groupInput
         );
     try {
-        console.log(userId)
+        // console.log(userId)
         newgroup.members.push(userId)
         const updatedgroup = await group.findByIdAndUpdate(
             newgroup._id,
@@ -30,7 +30,7 @@ export const  creategroup= async(req,res)=>{
     }
     catch (err) {
     next(err)
-    console.log(err);
+    // console.log(err);
     }
 };
 export const  getDebts= async(req,res)=>{
@@ -38,11 +38,11 @@ export const  getDebts= async(req,res)=>{
        
     try {
         const grp= await group.findById(groupId)
-        console.log("getDebts:",grp)
+        // console.log("getDebts:",grp)
         res.status(200).json(grp.simplifyDebt)
     }
     catch (err) {
-    console.log(err);
+    // console.log(err);
     }
 };
 
@@ -73,7 +73,7 @@ export const getgroups = async(req,res)=>{
     const userId= req.params.id;
     // console.log(req.params.userId)
     try{
-        console.log(userId)
+        // console.log(userId)
         const userr = await user.findById(userId)
         const allgroups = userr.groups
         const groupDetails = await Promise.all(allgroups.map(async groupId => {
@@ -82,7 +82,7 @@ export const getgroups = async(req,res)=>{
           }));
         res.json( groupDetails );
     }catch(err){
-        console.log(err)
+        // console.log(err)
     }
 }
 
