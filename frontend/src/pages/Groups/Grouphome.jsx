@@ -66,6 +66,7 @@ console.log(groupData)
       console.log(res.data.billSplit)
     }catch(err){
       console.log(err)
+      
     }
   }
 
