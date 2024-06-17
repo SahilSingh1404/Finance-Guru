@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import TradingViewWidget from '../../components/Stocks/TradingViewWidget'
 import Navbar from '../../components/Navbar'
 import axios from "axios"
-import HeatmapStocks from '../../components/Stocks/HeatmapStocks'
 
 const Stocks = ({user,thememode,toggle}) => {
 
@@ -29,7 +28,7 @@ const Stocks = ({user,thememode,toggle}) => {
     //function to add stock symbol
     const handleSubmit = async()=>{
         try{
-          if(input!=""){
+          if(input!==""){
             const res=await axios.post(`http://localhost:3001/api/user/addStock/${user._id}`,{input})
             console.log(res.data.user.stocks)
             const val=res.data.user.stocks
@@ -71,7 +70,7 @@ const Stocks = ({user,thememode,toggle}) => {
     console.log(stockData)
 
   return ( 
-    <div style={{backgroundColor:thememode=="dark"?"#181818":"#f0f0f0"}}>
+    <div style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}}>
         <Navbar thememode={thememode} toggle={toggle}/>
         <div className="mx-auto my-auto h-screen block justify-center items-center" style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}} >
           
