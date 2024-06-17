@@ -3,7 +3,7 @@ import  billSchema from "../models/bills.js";
 //controllers for bills and dues
 export const addBill = async(req,res)=>{
     const {userId,title,amount,currency,toWhom,recurring,dueDate} =req.body
-    console.log(req.body);
+    // console.log(req.body);
     const bill = billSchema(
         req.body.dueItem
     )
@@ -14,7 +14,7 @@ export const addBill = async(req,res)=>{
     }catch(err){
         res.status(500).json({message:'Server error'})
     }
-    console.log(bill)
+    // console.log(bill)
 
 }
 
@@ -30,14 +30,14 @@ export const getBills = async(req,res)=>{
 }
 
 export const editBill = async(req,res)=>{
-    console.log("mast",req.body.Bill);
+    // console.log("mast",req.body.Bill);
     const updateFields = {
         title: req.body.Bill.titleedit,
         dueDate: req.body.Bill.dueDateedit,
         amount: req.body.Bill.amountedit,
         toWhom: req.body.Bill.toWhomedit,
       };
-      console.log("badhiya",updateFields)
+    //   console.log("badhiya",updateFields)
     try{
         const bill = await billSchema.findByIdAndUpdate(req.params.id,{$set:updateFields},{new:true});
         res.status(200).json(bill)

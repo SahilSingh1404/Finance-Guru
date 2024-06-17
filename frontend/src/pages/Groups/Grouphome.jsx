@@ -36,7 +36,7 @@ console.log(groupData)
     //function to split bill among group members
     const handleSubmit = async()=>{
       try{
-        const res= await axios.post(`http://localhost:3001/api/group/splitbill`,{input})
+        const res= await axios.post(http://localhost:3001/api/group/splitbill,{input})
         console.log(res.data)
         setBillSplitData(res.data.billSplit)
         handleClose()
@@ -47,7 +47,7 @@ console.log(groupData)
 
     const getgroup=async()=>{
       try{
-        const res = await axios.get(`http://localhost:3001/api/group/getgroup/${id}`)
+        const res = await axios.get(http://localhost:3001/api/group/getgroup/${id})
         console.log(res.data)
         setgroupData(res.data)
         setBillSplitData(res.data.billSplit)
@@ -59,7 +59,7 @@ console.log(groupData)
     
   const handleApproved = async(memid)=>{
     try{
-      const res=await axios.put(`http://localhost:3001/api/group/markapproved/${groupData._id}`,{userId:memid})
+      const res=await axios.put(http://localhost:3001/api/group/markapproved/${groupData._id},{userId:memid})
       setApproved(prev=>!prev)
       setBillSplitData(res.data.billSplit)
       getgroup()
@@ -77,7 +77,7 @@ console.log(groupData)
    useEffect(()=>{
     const getMembers = async()=>{
       try{
-        const res = await axios.get(`http://localhost:3001/api/group/getmembers/${groupData._id}`)//add user Id
+        const res = await axios.get(http://localhost:3001/api/group/getmembers/${groupData._id})//add user Id
         console.log("members",res.data)
         setmembersdata(res.data)
       }catch(err){

@@ -15,7 +15,7 @@ function Login({user,setUser}) {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isUsernameValid, setIsUsernameValid] = useState(false);
   const [allEntry, setAllEntry] = useState([]);
-  const [validEmail,setValidemail]=useState(false)
+  // const [validEmail,setValidemail]=useState(false)
   const emailValidation= (email) => {  
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);

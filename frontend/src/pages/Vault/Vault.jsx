@@ -3,8 +3,6 @@ import {
   ref,
   uploadBytes,
   getDownloadURL,
-  listAll,
-  getMetadata,
 } from "firebase/storage";
 import { storage } from "../firebase";
 import axios from "axios";
@@ -16,7 +14,7 @@ function Vault({thememode,toggle,user}) {
   const [fileUrls, setfileUrls] = useState([]);
 
 
-  const filesListRef = ref(storage, "files/");
+  // const filesListRef = ref(storage, "files/");
 
   //function to upload file to firebase and mongodb
   const uploadFile = () => {
@@ -65,7 +63,7 @@ function Vault({thememode,toggle,user}) {
     }
     getFiles()
     
-  },[])
+  },)
 
   return (
     <div className="h-full" style={{ backgroundColor: thememode === 'dark' ? '#181818' :'#f0f0f0' }}>
@@ -86,7 +84,7 @@ function Vault({thememode,toggle,user}) {
       <div className="grid grid-cols-3 dark:bg-[#181818] m-4">{fileUrls.map((file) => (
         <div key={file.fileName}>
           <div className="m-2 max-w-[400px] h-[100px]  w-82 h-34 rounded-md shadow-md font-semibold px-2 py-2 border-1 border-black border-dashed flex align-middle justify-center cursor-pointer" style={{ color: thememode === "dark" ? "white" : "black",backgroundColor:thememode==="dark"?"#282828":"white",borderColor:thememode==="dark"?"white":"black" }} alt={file.fileName} onClick={() => downloadCSV(file.fileName)}>
-            <img src="folder.png" className="h-20 w-20"/>
+            <img src="folder.png" className="h-20 w-20" alt="no img"/>
             <div className="p-3">{file.fileName}</div>
             </div>
         </div>

@@ -28,7 +28,9 @@ const Inbox = ({ user,setUser,thememode,toggle }) => {
   }
   check()
 
-},[user?._id])
+},
+[user?._id]
+)
 console.log(inboxuser)
 useEffect(() => {
 
@@ -62,7 +64,7 @@ const handleAccept=async(key)=>{
         let i=0
         let key=""
         while(i<tokens.length){
-          if(tokens[i]=="sent")break
+          if(tokens[i]==="sent")break
            key+=tokens[i];
            key+=" "
            i++;
