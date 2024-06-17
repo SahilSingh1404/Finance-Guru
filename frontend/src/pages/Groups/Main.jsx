@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Navbar from '../../components/Navbar.jsx'
 import Modal from 'react-bootstrap/Modal';
-import {Button} from 'react-bootstrap'
 import axios from 'axios';
 import GroupCard from '../../components/GroupCard/GroupCard.jsx'
 import {Button as Buttonmui} from '@mui/material';
@@ -14,7 +13,7 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
     const theme = useTheme()
     const [showGroup, setShowGroup] = useState(false);
     const [showGroupJoin, setShowGroupJoin] = useState(false);
-    const [showFriend, setShowFriend] = useState(false);
+    // const [showFriend, setShowFriend] = useState(false);
     const [showAddFriend, setShowAddFriend] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [groupflag,setgroupflag] = useState(false)
@@ -39,7 +38,6 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
     const {title} = groupInput
     const {groupCode} = groupInput
     const {JoingCode} = joincode
-
 
     //modal opening and closing logic
     const handleGroupClose = () => setShowGroup(false);
@@ -177,9 +175,9 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
     },[groupflag])
 
   return (
-    <div style={{backgroundColor:thememode=="dark"?"#181818":"#f0f0f0"}} >
+    <div style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}} >
         <Navbar thememode={thememode} toggle={toggle}/>
-        <div className='flex flex-col gap-2 justify-start items-start min-h-screen' style={{backgroundColor:thememode=="dark"?"#181818":"#f0f0f0"}}>
+        <div className='flex flex-col gap-2 justify-start items-start min-h-screen' style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}}>
         <div className='flex justify-between w-full'>
         <div>
         <div className='font-extrabold text-2xl mx-4 mt-4 dark:text-[#f0f0f0]'> Groups</div>

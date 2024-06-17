@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import { Button } from 'react-bootstrap';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -17,12 +16,9 @@ import {Button as Buttonmui} from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 
-
 const GroupCard = ({key,setgroupData,groupData,allgroupsdata,setSelectedGroup, selectedGroup,thememode,toggle,user,setgroupflag}) => {
   const navigate = useNavigate()
   const theme = useTheme();
-const [show, setShow] = useState(false);
-const [showGroupHome, setShowGroupHome] = useState(false);
 const [showAddFriend, setShowAddFriend] = useState(false);
 const [friends,setFriends] = useState([])
 const [showDeleteModal,setShowDeleteModal] = useState(false);
@@ -38,10 +34,6 @@ const handleCloseDots = () => {
   setAnchorEl(null);
 };
 
-// const copy = () => toast("Copied to Clipboard");
-
-
-
 const handleOnChange = (position) => {
   const updatedCheckedState = checkedState.map((item, index) =>
     index === position ? !item : item
@@ -53,7 +45,7 @@ const handleOnChange = (position) => {
 
 useEffect(()=>{
   checkedState.map((item,index)=>{
-    if(item==true)setFriends(prev=>[...prev,user.friends[index]])
+    if(item===true)setFriends(prev=>[...prev,user.friends[index]])
 })
 },[checkedState])
 
@@ -68,37 +60,21 @@ const handleAddFriendsToGroup=async()=>{
     console.log(err)
   }
 }
-const [copied, setCopied] = useState(false);
 const handleAddFriendClose = () => setShowAddFriend(false);
 const handleAddFriendShow = () => {
   handleCloseDots()
   setShowAddFriend(true);
 }
-const handleCopyToClipboard = () => {
-  setCopied(true);
-  alert("Copied to clipboard")
-};
-const handleClose = () => setShow(false);
-const handleShow = () => setShow(true);
-
-const handleOpenGroup = () => {
-  console.log("yeeeee")
-  setShowGroupHome(true);
-  setSelectedGroup(groupData);
-};
 
 const handleDelete = async()=>{
   try{
-      const res=await axios.delete(`http://localhost:3001/api/group/deleteGroup/${groupData._id}`)
+      await axios.delete(`http://localhost:3001/api/group/deleteGroup/${groupData._id}`)
       setgroupflag((prev)=>!(prev))
       setShowDeleteModal(false)
   }catch(err){
       console.log(err)
   }
 }
-const handlePaid=()=>{
-  console.log("clicked")
-};
 
 const handleopendeletemodal=()=>{
   setShowDeleteModal(true)

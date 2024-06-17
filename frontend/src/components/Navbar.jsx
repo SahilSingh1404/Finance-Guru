@@ -27,13 +27,12 @@ const theme = createTheme({
     },
   });
  
-const pages = ['Dues', 'Groups', 'Savings'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// const pages = ['Dues', 'Groups', 'Savings'];
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar({thememode,toggle,setUser,user,setFlag,flag}) {
 
   const navigate=useNavigate()
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [navuser,setNavuser] = useState({})
  
@@ -57,28 +56,14 @@ function ResponsiveAppBar({thememode,toggle,setUser,user,setFlag,flag}) {
   },[user?._id,flag])
 
   console.log(user);
-  const [showNav, setShowNav] = useState(false);
-  
-  //  ------------- function to logout ----------------------- 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate('/login');
-  };
   
   function Logout() {
     localStorage.clear();
     navigate('/login');
   }
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {

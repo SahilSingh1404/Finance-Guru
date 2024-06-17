@@ -1,10 +1,7 @@
 import React,{useState,useEffect} from 'react'
-import Card from 'react-bootstrap/Card';
 import Navbar from '../../components/Navbar.jsx'
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button'
 import axios from 'axios';
-import GroupCard from '../../components/GroupCard/GroupCard.jsx'
 import { useParams } from 'react-router-dom';
 
 export const Grouphome = ({user,thememode,toggle}) => {
@@ -12,28 +9,13 @@ export const Grouphome = ({user,thememode,toggle}) => {
   const [groupData,setgroupData]=useState([])
  
   console.log(groupData)
-    const [showGroup, setShowGroup] = useState(false);
     const [show, setShow] = useState(false);
     const [showPart, setShowPart] = useState(false);
-    const [showGroupJoin, setShowGroupJoin] = useState(false);
-    const [showFriend, setShowFriend] = useState(false);
-
-    const handleGroupClose = () => setShowGroup(false);
-    const handleGroupShow = () => setShowGroup(true);
-    const handleGroupJoinClose = () => setShowGroupJoin(false);
-    const handleGroupJoinShow = () => setShowGroupJoin(true);
     const handleShowPart = () => setShowPart(true);
     const handleClosePart = () => setShowPart(false);
-
-    const handleFriendClose = () => setShowFriend(false);
-    const handleFriendShow = () => setShowFriend(true);
     const [membersdata,setmembersdata]=useState([])
-    const [paid,setPaid] = useState(false)
     const [approved,setApproved] = useState(false)
-    const [showGroupHome, setShowGroupHome] = useState(false);
-    const handleOpenGroup = () => {
-    setShowGroupHome(true);
-};
+  
 console.log(groupData)
 
     const [input, setInput] = useState({
@@ -117,7 +99,7 @@ console.log(groupData)
    <>
           <Navbar thememode={thememode} toggle={toggle}/>
 
-        <div className='flex flex-col justify-center items-start' style={{backgroundColor:thememode=="dark"?"#181818":"#f0f0f0"}}>
+        <div className='flex flex-col justify-center items-start' style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}}>
 
 
        
@@ -176,7 +158,7 @@ console.log(groupData)
           <div  key={mem.userId} className='mx-auto w-[50%] flex justify-around gap-2 items-center'>
              <div><b>Name: {" "}</b>{mem.name}</div> 
              <div><b>Amount: {" "}</b>{mem.amount}</div>
-            {(groupData.userId==user._id) &&  <button onClick={()=>handleApproved(mem.userId)} style={{cursor:"pointer"}} className='bg-[#000080] text-white p-2 m-2 rounded-md cursor-pointer'>{mem.approved===false ? "Approve" : "Approved"}</button>}
+            {(groupData.userId===user._id) &&  <button onClick={()=>handleApproved(mem.userId)} style={{cursor:"pointer"}} className='bg-[#000080] text-white p-2 m-2 rounded-md cursor-pointer'>{mem.approved===false ? "Approve" : "Approved"}</button>}
            </div>
 
         ))

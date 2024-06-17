@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import Navbar from '../../components/Navbar'
+import Navbar from '../../components/Navbar.jsx'
 import { useParams } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import { ReactComponent as Cash } from './cash-on-wallet.svg';
@@ -8,7 +8,6 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { MdContentCopy } from "react-icons/md";
 import Tooltip from '@mui/material/Tooltip';
-import { Button } from 'react-bootstrap';
 
 const SimplifyDebt = ({ user, thememode, toggle }) => {
     const { id } = useParams();
@@ -27,6 +26,7 @@ const SimplifyDebt = ({ user, thememode, toggle }) => {
     const handleCopyToClipboard = () => {
         setCopied(true);
         alert("Copied to clipboard")
+        console.log(copied)
       };
 
     const getGroup = async () => {
@@ -122,7 +122,7 @@ const SimplifyDebt = ({ user, thememode, toggle }) => {
 
     const handleAddComment = async () => {
         try {
-            const res = await axios.post(`http://localhost:3001/api/group/addcomment`, {
+            await axios.post(`http://localhost:3001/api/group/addcomment`, {
                 userId: user._id,
                 text: commentText,
                 groupId: id,
