@@ -309,7 +309,7 @@ return (
           </div>
 
           <div className="due flex justify-between w-full gap-4  ">
-            <label htmlFor="PersonDue " className='w-[30%]' style={{ color: thememode === 'dark' ? 'white' : 'black'}}>Due To</label> <br />
+            <label htmlFor="PersonDue " className='w-[30%]' style={{ color: thememode === 'dark' ? 'white' : 'black'}}>Pay To</label> <br />
             <input
               type="text"
               name="toWhom"
@@ -377,7 +377,7 @@ return (
           <Table striped borderless hover variant={thememode == 'dark' ? 'dark' : ''}>
             <thead>
               <tr>
-                <th>Due To</th>
+                <th>Pay To</th>
                 <th>Amount</th>
                 <th>Due date</th>
                 <th>Title</th>
@@ -388,7 +388,7 @@ return (
             {BillData?.map((bill) => (
               <>
               <tr key = {bill._id}>
-              <td>{bill.title}</td>
+              <td>{bill.toWhom}</td>
               <td>&#8377; {bill.amount}</td>
               <td>{bill.dueDate?.substring(0,10)}</td>
               <td>{bill.title}</td>

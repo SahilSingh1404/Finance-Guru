@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import './Navbar.css'
 
 const theme = createTheme({
     palette: {
@@ -92,6 +93,7 @@ function ResponsiveAppBar({thememode,toggle,setUser,user,setFlag,flag}) {
         <Toolbar disableGutters>
           <img src="logo.png" style={{height:"50px",marginRight:"20px"}}/>
           <Typography
+          className='heading'
             variant="h6"
             noWrap
             component="a"
@@ -102,8 +104,7 @@ function ResponsiveAppBar({thememode,toggle,setUser,user,setFlag,flag}) {
               fontFamily: 'poppins',
               fontWeight: 700,
               letterSpacing: '.1rem',
-            color: thememode === 'dark' ? 'white' : '#000080',
-              
+            color: thememode === 'dark' ? 'white' : '#000080',           
               textDecoration: 'none',
             }}
           >

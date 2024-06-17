@@ -14,7 +14,6 @@ const languages = [
   { value: "hi", text: "Hindi" },
 ];
 
-
 const Dashboard = ({user,thememode,toggle,setUser}) => {
   const [lang, setLang] = useState("en");
   const [updateFlag, setUpdateFlag] = useState(false); 
@@ -77,9 +76,11 @@ const Dashboard = ({user,thememode,toggle,setUser}) => {
       if(name=='type' ||name=='category'||name=='desc'){
         const capitalizedValue = capitalizeFirstLetter(e.target.value);
         setTransInput({...transInput,[name]:capitalizedValue})
+        console.log(name)
       }
       else{
         setTransInput({...transInput,[name]:e.target.value})
+        console.log(name)
       }
     }
 
