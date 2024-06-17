@@ -64,7 +64,7 @@ function Navbar({thememode,toggle,setUser,user,setFlag,flag}) {
     <div className="flex gap-30 justify-between items-center bg-[#8656cd] navbar-parent">
       {/* ------------------ wesite name -------------------  */}
          <div className='text-2xl mx-2 text-white font-extrabold paisa'>
-            Paisa Vasoolis
+            Finance Guru
         </div>
           
 

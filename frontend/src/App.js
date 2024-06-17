@@ -82,7 +82,7 @@ function App() {
           <Route path="/simplifydebt/:id" element={<SimplifyDebt user={user} thememode={thememode} toggle={toggle}/>}/>
           <Route path="/btn" element={<ToggleBtn thememode={thememode} toggle={toggle}/>}/>
           <Route path="/save" element={<Savings2 user={user} thememode={thememode} toggle={toggle} />} />
-          <Route path='/simplify' element={<SimplifyDebt user={user} thememode={thememode} toggle={toggle}/>}></Route>
+          <Route path='/simplify' element={<SimplifyDebt user={user} thememode={thememode} toggle={toggle}/>}/>
           <Route path="/profile" element={<Profile user={user} thememode={thememode} toggle={toggle} setUser={setUser}/>} />
           <Route path="/billsplit" element={<Grouphome user={user} thememode={thememode} toggle={toggle}/>}/>
           <Route path="/inbox" element={<Inbox user={user} setUser={setUser} thememode={thememode} toggle={toggle}/>} />
