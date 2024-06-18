@@ -6,6 +6,8 @@ import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import './SavingsCard.css';
 
+const backendURL="https://finance-trackernew.onrender.com"
+
 const SavingCard = ({user,props,savingData,setSavingData,items,thememode,toggle,updateFlag,setUpdateFlag}) => {
   console.log()
   const [show, setShow] = useState(false);
@@ -50,7 +52,7 @@ const handleSavingInput = (name) => (e) => {
           setErrorMessage("All entries should be filled");
           return; 
         }
-        const res = await axios.put(`http://localhost:3001/api/savings/editSaving/${props._id}`, {requestBody});
+        const res = await axios.put(`${backendURL}/api/savings/editSaving/${props._id}`, {requestBody});
         console.log(res.data);
         setSavingInput({
           userId: user._id,
@@ -71,7 +73,7 @@ const handleSavingInput = (name) => (e) => {
 
   const handleDelete = async()=>{
       try{
-          const res=await axios.delete(`http://localhost:3001/api/savings/deleteSaving/${props._id}`)
+          const res=await axios.delete(`${backendURL}/api/savings/deleteSaving/${props._id}`)
           console.log(res.data.saving)
           const sav=res.data.saving
           setSavingData(savingData.filter(data=>data._id!=sav._id))

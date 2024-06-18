@@ -8,6 +8,8 @@ import Table from 'react-bootstrap/Table';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import Modal from 'react-bootstrap/Modal';
 
+const backendURL="https://finance-trackernew.onrender.com"
+
 function Savings2({ user,setUser,thememode,toggle}) {
   console.log(thememode);
   const [inputTitle, setInputTitle] = useState("");
@@ -134,7 +136,7 @@ function Savings2({ user,setUser,thememode,toggle}) {
           setErrorMessage("All entries should be filled");
           return;
         }
-        const res = await axios.put(`http://localhost:3001/api/savings/editSaving/${obj._id}`, {sav});
+        const res = await axios.put(`${backendURL}/api/savings/editSaving/${obj._id}`, {sav});
         console.log(res.data);
         setsav({
           userId: user._id,
@@ -195,7 +197,7 @@ const currenciData = UCurrency(currenci);
       // console.log(saving.currAmt)
       saving.targetAmt =Math.floor(saving.targetAmt / currenciData[currencysmall]);
       // console.log(saving.targetAmt)
-      const res = await axios.post("http://localhost:3001/api/savings/addSaving", { saving });
+      const res = await axios.post(`${backendURL}/api/savings/addSaving`, { saving });
       // console.log(res.data.saving);
       const val = res.data.saving;
       setSavingData(prev => [...prev, val]);
@@ -227,7 +229,7 @@ const currenciData = UCurrency(currenci);
     //function to fetch savings data
     const getSavings = async()=>{
       try{
-        const res = await axios.get(`http://localhost:3001/api/savings/getSavings/${user._id}`)//add user Id
+        const res = await axios.get(`${backendURL}/api/savings/getSavings/${user._id}`)//add user Id
         console.log("savings data:",res.data)
         setSavingData(res.data.savings)
         const numberOfSavings = res.data.savings.filter(saving => saving.currAmt >= saving.targetAmt).length;
@@ -245,7 +247,7 @@ const currenciData = UCurrency(currenci);
   const handleDelete = () => {
   const delsaving = async()=>{
     try{
-        const res=await axios.delete(`http://localhost:3001/api/savings/deleteSaving/${selectedSavingId}`)
+        const res=await axios.delete(`${backendURL}/api/savings/deleteSaving/${selectedSavingId}`)
         // console.log(res.data)
         setUpdateFlag((prev)=>!(prev))
         handleCloseDeleteModal();

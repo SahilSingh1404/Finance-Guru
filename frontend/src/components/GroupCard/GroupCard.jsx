@@ -14,6 +14,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTheme } from '@mui/material/styles';
 import {Button as Buttonmui} from '@mui/material';
 
+
+const backendURL="https://finance-trackernew.onrender.com"
+
 const ITEM_HEIGHT = 48;
 
 const GroupCard = ({key,setgroupData,groupData,allgroupsdata,setSelectedGroup, selectedGroup,thememode,toggle,user,setgroupflag}) => {
@@ -43,7 +46,7 @@ const handleOnChange = (position) => {
 
 const handleDelete = async()=>{
   try{
-      await axios.delete(`http://localhost:3001/api/group/deleteGroup/${groupData._id}`)
+      await axios.delete(`${backendURL}/api/group/deleteGroup/${groupData._id}`)
       setgroupflag((prev)=>!(prev))
       setShowDeleteModal(false)
   }catch(err){

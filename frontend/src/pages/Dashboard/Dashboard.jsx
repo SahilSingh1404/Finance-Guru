@@ -6,6 +6,8 @@ import TransactionCard from '../../components/Cards/TransactionCard';
 import { CSVLink } from "react-csv"
 import './Dashboard.css'
 
+const backendURL="https://finance-trackernew.onrender.com"
+
 const Dashboard = ({user,thememode,toggle,setUser}) => {
   const [updateFlag, setUpdateFlag] = useState(false); 
   const [show,setShow] = useState(false)
@@ -86,7 +88,7 @@ useEffect(()=>{
   //function to retrieve all user transactions
   const ifnocategselect=async()=>{
     try{
-      const res = await axios.get(`http://localhost:3001/api/transactions/getTransactions/${user._id}`);
+      const res = await axios.get(`${backendURL}/api/transactions/getTransactions/${user._id}`);
       console.log("transaction data",res.data)
       setFilteredData(res.data.trans)
       setTransactionData(res.data.trans)
@@ -107,7 +109,7 @@ console.log(datat)
         console.log("filters:",filterInput)
         const addFilter = async()=>{
         try{
-          const res = await axios.post("http://localhost:3001/api/transactions/getTransactionsByFilter",{filterInput})
+          const res = await axios.post(`${backendURL}/api/transactions/getTransactionsByFilter`,{filterInput})
           console.log(res.data)
           setFilteredData(res.data.trans)
           setFilterState(true)
@@ -169,7 +171,7 @@ console.log(datat)
         const response = await fetch(`https://api.freecurrencyapi.com/v1/latest?apikey=LQvy3LtRMZSLNj7WvwKX3tPoA37h6FdzWNaLbw4f&currencies=MXN%2CSEK%2CCHF%2CSGD%2CHKD%2CCNY%2CCAD%2CAUD%2CJPY%2CGBP%2CEUR%2CUSD%2CCAD&base_currency=INR`);
         const result=response.json();
         console.log(result);
-        const res = await axios.get(`http://localhost:3001/api/transactions/getTotalStats/${user._id}`)
+        const res = await axios.get(`${backendURL}/api/transactions/getTotalStats/${user._id}`)
         console.log(res.data)
         setStats(res.data)
       }catch(err){
@@ -182,7 +184,7 @@ console.log(datat)
   useEffect(()=>{
     const getTrans = async()=>{
       try{
-        const res = await axios.get(`http://localhost:3001/api/transactions/getTransactions/${user._id}`)//add user Id
+        const res = await axios.get(`${backendURL}/api/transactions/getTransactions/${user._id}`)//add user Id
         console.log(res.data)
         const numberOfIncomeTransactions = res.data.trans.filter((transaction) => transaction.type === 'income').length;
         console.log(numberOfIncomeTransactions)
@@ -216,7 +218,7 @@ console.log(datat)
           setErrorMessage("All fields except description should be filled");
           return ;
         }
-        const res = await axios.post("http://localhost:3001/api/transactions/addTransaction",{userId:user._id,type,category,desc,date,currency,amount})
+        const res = await axios.post(`${backendURL}/api/transactions/addTransaction`,{userId:user._id,type,category,desc,date,currency,amount})
         console.log(res.data)
         const val=res.data.transaction
         setTransactionData(prev=>[...prev,val])

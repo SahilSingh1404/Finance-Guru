@@ -5,6 +5,9 @@ import YearlyChart from '../../components/Charts/YearlyChart'
 import axios from 'axios'
 import Navbar from '../../components/Navbar'
 import CategoryChart from '../../components/Charts/CategoryChart'
+
+const backendURL="https://finance-trackernew.onrender.com"
+
 const Chart = ({user,setUser,thememode,toggle}) => {
     const [weeklyData,setWeeklyData]=useState([])
     const [monthlyData,setMonthlyData]=useState([])
@@ -34,7 +37,7 @@ const Chart = ({user,setUser,thememode,toggle}) => {
        
        const getWeeklyData = async()=>{
         try{
-            const res = await axios.get(`http://localhost:3001/api/transactions/getWeeklyTransaction/${user._id}`)
+            const res = await axios.get(`${backendURL}/api/transactions/getWeeklyTransaction/${user._id}`)
             console.log(res.data.weeklyData)
             setWeeklyData(res.data.weeklyData)
 
@@ -45,7 +48,7 @@ const Chart = ({user,setUser,thememode,toggle}) => {
 
        const getMonthlyData = async()=>{
         try{
-            const res = await axios.get(`http://localhost:3001/api/transactions/getMonthlyTransaction/${user._id}`)
+            const res = await axios.get(`${backendURL}/api/transactions/getMonthlyTransaction/${user._id}`)
             console.log("monthly data",res.data.monthlyData)
             setMonthlyData(res.data.monthlyData)
 
@@ -56,7 +59,7 @@ const Chart = ({user,setUser,thememode,toggle}) => {
 
        const getYearlyData = async()=>{
         try{
-            const res = await axios.get(`http://localhost:3001/api/transactions/getYearlyTransaction/${user._id}`)
+            const res = await axios.get(`${backendURL}/api/transactions/getYearlyTransaction/${user._id}`)
             setYearlyData(res.data.yearlyData)
 
         }catch(err){
@@ -66,7 +69,7 @@ const Chart = ({user,setUser,thememode,toggle}) => {
 
        const getCategory = async()=>{
         try{
-          const res= await axios.get(`http://localhost:3001/api/transactions/getCategoryWiseTransaction/${user._id}`)
+          const res= await axios.get(`${backendURL}/api/transactions/getCategoryWiseTransaction/${user._id}`)
           const result = res.data
           setCategoryData(res.data)
           const allCategories = result.map(item => item._id);

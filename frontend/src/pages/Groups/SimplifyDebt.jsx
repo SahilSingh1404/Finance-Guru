@@ -9,6 +9,8 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { MdContentCopy } from "react-icons/md";
 import Tooltip from '@mui/material/Tooltip';
 
+const backendURL="https://finance-trackernew.onrender.com"
+
 const SimplifyDebt = ({ user, thememode, toggle }) => {
     const { id } = useParams();
     const [inputFields, setInputFields] = useState([]);
@@ -31,7 +33,7 @@ const SimplifyDebt = ({ user, thememode, toggle }) => {
 
     const getGroup = async () => {
         try {
-            const res = await axios.get(`http://localhost:3001/api/group/getgroup/${id}`);
+            const res = await axios.get(`${backendURL}/api/group/getgroup/${id}`);
             setGroupData(res.data);
         } catch (err) {
             console.log(err);
@@ -94,7 +96,7 @@ const SimplifyDebt = ({ user, thememode, toggle }) => {
         const outputArray = Object.values(resultMap);
         const simplify = async () => {
             try {
-                const res = await axios.post(`http://localhost:3001/api/group/simplifyDebt/${id}`, { outputArray });
+                const res = await axios.post(`${backendURL}/api/group/simplifyDebt/${id}`, { outputArray });
                 setData(res.data);
             } catch (err) {
                 console.log(err);
@@ -107,7 +109,7 @@ const SimplifyDebt = ({ user, thememode, toggle }) => {
     useEffect(() => {
         const getDebts = async () => {
             try {
-                const res = await axios.get(`http://localhost:3001/api/group/getDebts/${id}`);
+                const res = await axios.get(`${backendURL}/api/group/getDebts/${id}`);
                 setData(res.data);
             } catch (err) {
                 console.log(err);
@@ -122,7 +124,7 @@ const SimplifyDebt = ({ user, thememode, toggle }) => {
 
     const handleAddComment = async () => {
         try {
-            await axios.post(`http://localhost:3001/api/group/addcomment`, {
+            await axios.post(`${backendURL}/api/group/addcomment`, {
                 userId: user._id,
                 text: commentText,
                 groupId: id,
@@ -137,7 +139,7 @@ const SimplifyDebt = ({ user, thememode, toggle }) => {
 
     const getComments = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/api/group/getcomments/${id}`);
+            const response = await axios.get(`${backendURL}/api/group/getcomments/${id}`);
             setComments(response.data.commentss);
         } catch (error) {
             console.error('Error fetching comments:', error);
@@ -150,7 +152,7 @@ const SimplifyDebt = ({ user, thememode, toggle }) => {
 
     const getMembers = async () => {
         try {
-            const res = await axios.get(`http://localhost:3001/api/group/getmembers/${id}`);
+            const res = await axios.get(`${backendURL}/api/group/getmembers/${id}`);
             setMembersData(res.data);
         } catch (err) {
             console.log(err);
@@ -284,7 +286,7 @@ const SimplifyDebt = ({ user, thememode, toggle }) => {
                       {user?.username === debt[1] && (
                         <button onClick={async () => {
                           try {
-                            const res = await axios.post(`http://localhost:3001/api/group/approveDebt/${id}`, debt);
+                            const res = await axios.post(`${backendURL}/api/group/approveDebt/${id}`, debt);
                             setData(res.data.simplifyDebt);
                             console.log(res.data);
                           } catch (err) {

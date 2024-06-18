@@ -7,6 +7,8 @@ import {auth,provider} from "../firebase.js"
 import {signInWithPopup} from "firebase/auth"
 import GoogleButton from 'react-google-button'
 
+const backendURL="https://finance-trackernew.onrender.com"
+
 function Signup({user,setUser}) 
 {
   const navigate = useNavigate()
@@ -60,7 +62,7 @@ function Signup({user,setUser})
     signInWithPopup(auth,provider).then((result)=>{
       console.log(result);
       axios
-            .post("http://localhost:3001/api/auth/google", {
+            .post(`${backendURL}/api/auth/google`, {
               username: result.user.displayName,
               email: result.user.email,
               img: result.user.photoURL,
@@ -83,7 +85,7 @@ function Signup({user,setUser})
       setEntries([entries, Entry]);
   
       try {
-        const res = await axios.post("http://localhost:3001/api/auth/signup", {
+        const res = await axios.post(`${backendURL}/api/auth/signup`, {
           username,
           email,
           password,

@@ -6,6 +6,8 @@ import Table from 'react-bootstrap/Table';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import Modal from 'react-bootstrap/Modal';
 
+const backendURL="https://finance-trackernew.onrender.com"
+
 function Dues({ user, thememode, toggle,setUser }) {
   const [billflag,setbillflag] = useState(false)
   const [selecteddue,setselecteddue] = useState(null);
@@ -48,7 +50,7 @@ function Dues({ user, thememode, toggle,setUser }) {
       return ;
     }
     try {
-      const res = await axios.post('http://localhost:3001/api/bills/addBill', { dueItem });
+      const res = await axios.post(`${backendURL}/api/bills/addBill`, { dueItem });
       console.log(res.data);
       const val = res.data.bill;
       setBillData((prev) => [...prev, val]);
@@ -89,7 +91,7 @@ function Dues({ user, thememode, toggle,setUser }) {
   useEffect(()=>{
     const getBills = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/api/bills/getBills/${user._id}`);
+        const res = await axios.get(`${backendURL}/api/bills/getBills/${user._id}`);
         console.log(res.data);
         setBillData(res.data.bill);
       } catch (err) {
@@ -170,7 +172,7 @@ const handleSubmitBill = (e,obj) => {
         setErrorMessage("All entries should be filled");
         return;
       }
-      const res = await axios.put(`http://localhost:3001/api/bills/editBill/${obj._id}`, {Bill});
+      const res = await axios.put(`${backendURL}/api/bills/editBill/${obj._id}`, {Bill});
       console.log(res.data);
       setBill({
       userId: user._id,
@@ -194,7 +196,7 @@ const handleDelete = () => {
   const delBill = async () => {
     try {
       console.log(selecteddue);
-      const res = await axios.delete(`http://localhost:3001/api/bills/deleteBill/${selecteddue}`);
+      const res = await axios.delete(`${backendURL}/api/bills/deleteBill/${selecteddue}`);
       console.log(res.data);
       setbillflag((prev)=>!(prev))
       setShowDeleteModal(false)

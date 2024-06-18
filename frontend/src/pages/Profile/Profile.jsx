@@ -7,6 +7,8 @@ import axios from "axios"
 import { AiFillEdit } from 'react-icons/ai';
 import { RxCross2 } from "react-icons/rx";
 
+const backendURL="https://finance-trackernew.onrender.com"
+
 function Profile({ user, thememode, toggle,setUser}) {
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState(user.image);
@@ -53,7 +55,7 @@ function Profile({ user, thememode, toggle,setUser}) {
           .then((url) => {
             const addUrl= async()=>{
               try{
-                const res = await axios.put(`http://localhost:3001/api/user/addImg/${user._id}`,{url})
+                const res = await axios.put(`${backendURL}/api/user/addImg/${user._id}`,{url})
                 setUser(res.data.user)
                 localStorage.setItem("user",JSON.stringify(res.data.user))
                 setFlag(prev=>!prev)

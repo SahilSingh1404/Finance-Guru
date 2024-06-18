@@ -8,6 +8,8 @@ import Menu from '@mui/material/Menu';
 import { useTheme } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 
+const backendURL="https://finance-trackernew.onrender.com"
+
 export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => {
   console.log(groupData)
     const theme = useTheme()
@@ -79,7 +81,7 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
       const addgroup =async()=>{
           try{
             console.log(groupInput)
-            const res = await axios.post("http://localhost:3001/api/group/creategroup",{groupInput: { ...groupInput, groupCode: groupCode },})
+            const res = await axios.post(`${backendURL}/api/group/creategroup`,{groupInput: { ...groupInput, groupCode: groupCode },})
             console.log(res.data.newgroup)
             const val=res.data.newgroup
             setgroupData(prev=>[...prev,val])
@@ -104,7 +106,7 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
       const addgroup =async()=>{
           try{
             console.log(JoingCode)
-            const res = await axios.post("http://localhost:3001/api/group/joingroup",{joincode})
+            const res = await axios.post(`${backendURL}/api/group/joingroup`,{joincode})
             console.log(res.data.newgroup)
             setgroupflag((prev)=>!(prev))
             console.log(groupData)
@@ -140,7 +142,7 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
       //function to get all the groups a user is in
       const getGroups = async()=>{
         try{
-          const res = await axios.get(`http://localhost:3001/api/group/getgroups/${user._id}`)//add user Id
+          const res = await axios.get(`${backendURL}/api/group/getgroups/${user._id}`)//add user Id
           console.log(res.data)
           setgroupData(res.data)
         }catch(err){
