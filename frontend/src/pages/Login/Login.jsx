@@ -3,9 +3,6 @@ import "./Login.css";
 import {Link} from 'react-router-dom'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {auth,provider} from "../firebase.js"
-import {signInWithPopup} from "firebase/auth"
-import GoogleButton from 'react-google-button'
 
 const backendURL="https://finance-trackernew.onrender.com"
 
@@ -58,25 +55,7 @@ function Login({user,setUser}) {
       setUsername("")
   };
   
-  const googlesekar = (req,res)=>{
-    signInWithPopup(auth,provider).then((result)=>{
-      console.log(result);
-      console.log(result.user.photoURL);
-      axios
-            .post(`${backendURL}/api/auth/google`, {
-              username: result.user.displayName,
-              email: result.user.email,
-              image: result.user.photoURL,
-            })
-            .then((res) => {
-              console.log(res.data)
-              setUser(res.data)
-            localStorage.setItem("user", JSON.stringify(res.data))
-              navigate("/dashboard")
-            });
-    }).catch((err)=>{console.log(err)})
-  }
-   
+  
   return (
     <>
     <form onSubmit={submitFunction}>
@@ -124,7 +103,6 @@ function Login({user,setUser}) {
            Login
             </div>  
 
-            <GoogleButton  onClick={googlesekar}/>
           </div>
           <div className="forgotPass">
            <div>Not having any account? </div>

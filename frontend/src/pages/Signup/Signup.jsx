@@ -3,9 +3,6 @@ import {Link} from 'react-router-dom'
 import './SignUp.css'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
-import {auth,provider} from "../firebase.js"
-import {signInWithPopup} from "firebase/auth"
-import GoogleButton from 'react-google-button'
 
 const backendURL="https://finance-trackernew.onrender.com"
 
@@ -54,26 +51,6 @@ function Signup({user,setUser})
   const emptyConfirmpass=()=>{
    
     setConformpass("");
-  }
-
-  //Google OAuth function
-  const googlelogin = (req,res)=>{
-
-    signInWithPopup(auth,provider).then((result)=>{
-      console.log(result);
-      axios
-            .post(`${backendURL}/api/auth/google`, {
-              username: result.user.displayName,
-              email: result.user.email,
-              img: result.user.photoURL,
-            })
-            .then((res) => {
-              console.log(res.data)
-              setUser(res.data)
-            localStorage.setItem('user', JSON.stringify(res.data))
-              navigate("/dashboard")
-            });
-    }).catch((err)=>{console.log(err)})
   }
 
   // -------------------- function to handle submit ----------------------- 
@@ -194,9 +171,7 @@ function Signup({user,setUser})
             >
               Submit
 
-              {/* ----------------- signup with google -----------------------  */}
             </div>
-            <GoogleButton  onClick={googlelogin}/>  
             </div>
             
             <div className="forgotPass">
