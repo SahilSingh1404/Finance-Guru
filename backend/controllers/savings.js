@@ -1,12 +1,8 @@
 import savingSchema from "../models/savings.js"
 
 export const addSaving = async(req,res)=>{
-
-    // console.log(req.body)
-
     const saving = savingSchema(
         req.body.saving
-
     )
 
     try{
@@ -42,6 +38,7 @@ export const editSaving = async(req,res)=>{
         // console.log(err)
     }
 }
+
 export const deleteSaving = async(req,res)=>{
     try{
         const saving = await savingSchema.findByIdAndDelete(req.params.id);

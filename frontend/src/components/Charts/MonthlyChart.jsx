@@ -1,11 +1,8 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS } from 'chart.js/auto'
-import { Chart }            from 'react-chartjs-2'
 
 const MonthlyChart = ({ monthlyData,thememode }) => {
  
-  // -------------colors for the lightTheme -------------------- 
   const lightTheme = {
     colorText: 'black',
     income: 'rgba(75,192,192,0.5)', 
@@ -13,8 +10,6 @@ const MonthlyChart = ({ monthlyData,thememode }) => {
     expenses: 'rgba(255,99,132,0.5)', 
     expensesBorder: 'rgba(255,99,132,1)',
   };
-
-  //  ---------------- colors for the darkTheme ----------------------- 
 
   const darkTheme = {
     colorText: 'white',
@@ -24,10 +19,7 @@ const MonthlyChart = ({ monthlyData,thememode }) => {
     expensesBorder: 'rgba(165,42,42,1)',
   };
 
-    // ---------- object according to theme -------------- 
-
   const colors = thememode === 'dark' ? darkTheme : lightTheme;
-
 
   const data = {
     labels: monthlyData.map(data=>data.month),

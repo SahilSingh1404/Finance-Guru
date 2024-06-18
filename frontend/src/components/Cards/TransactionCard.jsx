@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
 import { AiTwotoneCalendar } from 'react-icons/ai';
 // ------------- TransactionCard -------------------------- 
 const TransactionCard = ({ user,transactionData, key,thememode,toggle,setTransactionData,setUpdateFlag }) => {
@@ -100,11 +99,11 @@ const TransactionCard = ({ user,transactionData, key,thememode,toggle,setTransac
   return (
     <div>
     <Card variant="light" border="secondary" className='mx-4 my-4 dark:text-white'>
-      <Card.Header className='font-bold text-xl' style={{backgroundColor:thememode=="dark"?"#3a3a3a":"white"}}> Category{" "}:-{" "}{transactionData.category}</Card.Header>
-      <Card.Body style={{backgroundColor:thememode=="dark"?"#282828":"white"}}>
+      <Card.Header className='font-bold text-xl' style={{backgroundColor:thememode==="dark"?"#3a3a3a":"white"}}> Category{" "}:-{" "}{transactionData.category}</Card.Header>
+      <Card.Body style={{backgroundColor:thememode==="dark"?"#282828":"white"}}>
         <div className='flex justify-between items-center'>
-        <Card.Text className='text-md align-middle items-center my-1' style={{color:transactionData.type=="expense"?'red':'green'}}> Amount{" "}:-  &#8377;{" "}{transactionData.amount}</Card.Text>
-        {/* <Card.Text className='flex align-middle my-1 mx-4'><AiTwotoneCalendar size={20} />{transactionData.date.substring(0,10)}</Card.Text> */}
+        <Card.Text className='text-md align-middle items-center my-1' style={{color:transactionData.type==="expense"?'red':'green'}}> Amount{" "}:-  &#8377;{" "}{transactionData.amount}</Card.Text>
+
       <div className='flex justify-between gap-2'>
         <AiFillEdit onClick={handleShow} style={{cursor:"pointer"}}/>
         <AiFillDelete onClick={handleopendeletemodal} style={{"cursor":"pointer"}}/>
@@ -151,7 +150,6 @@ const TransactionCard = ({ user,transactionData, key,thememode,toggle,setTransac
                     {transactionData.date && transactionData.date.substring(0, 10)}
                  </Card.Text>
             
-
             <div className='flex justify-between items-center gap-6'>
             <AiFillEdit onClick={handleShow} style={{ cursor: 'pointer',fontSize:"20px" }} />
             <AiFillDelete onClick={() => handleDelete(transactionData._id)} style={{ cursor: 'pointer',fontSize:"20px"  }} />
@@ -207,7 +205,6 @@ const TransactionCard = ({ user,transactionData, key,thememode,toggle,setTransac
               <button type="submit" className="mt-4 bg-[#000080] text-white py-2 px-4 rounded">Save Changes</button>
             </form>
 
-
         </Modal.Body>
       </Modal>
       <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
@@ -229,8 +226,6 @@ const TransactionCard = ({ user,transactionData, key,thememode,toggle,setTransac
               </Modal.Footer>
             </Modal>
     </div>
-    
-    
   );
 };
 

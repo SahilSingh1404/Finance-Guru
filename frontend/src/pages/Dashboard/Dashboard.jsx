@@ -47,10 +47,8 @@ const Dashboard = ({user,thememode,toggle,setUser}) => {
     const bigexpense = 'AAKR.png'
     const [incomeshow,setIncomeshow] = useState(false)
     const [expenseshow,setExpenseshow] = useState(false)
-    const incomebadge = 'SoBeautiful.png'
-    const expensebadge = 'SoElegant.png'
-
-    console.log(uniqueCategories)
+    
+    // console.log(uniqueCategories)
     const headers = [
       { label: "Transaction Type", key: "type" },
       { label: "Amount", key: "amount" },
@@ -148,17 +146,6 @@ console.log(datat)
         }
       }
 
-      //function to add badge
-      const addBadge=async(img)=>{
-        try{
-          console.log(img)
-          const res = await axios.post(`http://localhost:3001/api/user/addbadge/${user._id}`,{img})
-          console.log(res.data.user)
-        }catch(err){
-          console.log(err.response.data)
-        }
-      }
-  
       //function to handle multiple currencies
       
       const UCurrency=(currency)=>{
@@ -227,14 +214,10 @@ console.log(datat)
         console.log(res.data)
         const numberOfIncomeTransactions = res.data.trans.filter((transaction) => transaction.type === 'income').length;
         console.log(numberOfIncomeTransactions)
-        if(numberOfIncomeTransactions==50){
-          addBadge(incomebadge)
-        }
+        
         const numberOfExpenseTransactions = res.data.trans.filter((transaction) => transaction.type === 'expense').length;
         console.log(numberOfExpenseTransactions)
-        if(numberOfExpenseTransactions==50){
-          addBadge(expensebadge)
-        }
+        
         setTransactionData(res.data.trans)
       }catch(err){
         console.log(err)
@@ -270,14 +253,7 @@ console.log(datat)
         const val=res.data.transaction
         setTransactionData(prev=>[...prev,val])
         setUpdateFlag((prevFlag) => !(prevFlag));
-        if(amount>=100000 && type=="expense"){
-          addBadge(bigexpense)
-          handleExpenseShow()
-        }
-        if(amount>=100000 && type=="income"){
-          addBadge(bigincome)
-          handleIncomeShow()
-        }
+        
         setTransInput({
           userId:user._id,
           type:'expense',
@@ -378,7 +354,6 @@ console.log(datat)
         </div>
         </div>
 
-
         {/* -------------------------------Listing Transaction Cards below filter bar---------------------------- */}
       <div className='h-[95%] w-full flex flex-col align-middle col-span-2'> 
         <div style={{width:"100%"}} className='overflow-y-scroll'>
@@ -472,27 +447,6 @@ console.log(datat)
         <Modal.Footer>
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
           <button className='bg-[#000080] p-2 rounded-md text-white' onClick={handleSubmit} required>Save</button>
-        </Modal.Footer>
-      </Modal>
-
-      <Modal show={incomeshow} onHide={handleIncomeClose} animation={false} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Congratulations! You are rewarded with a Badge!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <img src="BadeLog.png" alt="Badge Image" className="w-100" />
-        </Modal.Body>
-        <Modal.Footer>
-        </Modal.Footer>
-      </Modal>
-      <Modal show={expenseshow} onHide={handleExpenseClose} animation={false} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Congratulations! You are rewarded with a Badge!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <img src="AAKR.png" alt="Badge Image" className="w-100" />
-        </Modal.Body>
-        <Modal.Footer>
         </Modal.Footer>
       </Modal>
         </div>

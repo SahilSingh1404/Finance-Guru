@@ -1,5 +1,5 @@
 import Transaction from "../models/transaction.js";
-import User from "../models/user.js"
+
 export const ErrorMessage = (status,message)=>{
     const error = new Error();
     error.status = status;
@@ -28,7 +28,6 @@ export const addTransaction = async(req,res)=>{
         res.status(500).json({message:'Server error'})
         // console.log(err)
     }
-    // console.log(transaction)
 }
 
 export const getTransactions=async(req,res)=>{
@@ -43,11 +42,8 @@ export const getTransactions=async(req,res)=>{
     }
 }
 
-
 export const editTransaction=async(req,res)=>{
     try{
-      // console.log(req.body)
-      // console.log(req.params.id)
         const tran = await Transaction.findById(req.params.id);
         if(!tran){
             return next(createError(404,"Transaction not found"));

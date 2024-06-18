@@ -13,9 +13,4 @@ router.get("/getMonthlyTransaction/:userId",getMonthlyTransaction);
 router.get("/getYearlyTransaction/:userId",getYearlyTransaction);
 router.get("/getCategoryWiseTransaction/:userId",getCategoryWiseTransaction);
 
-
-
-
-
-
 export default router;

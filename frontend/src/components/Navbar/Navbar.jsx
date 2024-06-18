@@ -1,7 +1,6 @@
 import React, { useState,useEffect} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes,faUser } from '@fortawesome/free-solid-svg-icons';
-import {Link} from 'react-router-dom'
 import 'tailwindcss/base.css'; 
 import 'tailwindcss/components.css'; 
 import 'tailwindcss/utilities.css'; 
@@ -11,7 +10,6 @@ import ToggleBtn from './ToggleBtn.jsx';
 
 import Profile from '../../pages/Profile/Profile.jsx';
 import { FaRegEnvelope } from "react-icons/fa";
-import Inbox from '../../pages/Inbox/inbox.jsx'
 
 function Navbar({thememode,toggle,setUser,user,setFlag,flag}) {
   const [navuser,setNavuser] = useState({})
@@ -63,7 +61,7 @@ function Navbar({thememode,toggle,setUser,user,setFlag,flag}) {
   return (
     <div className="flex gap-30 justify-between items-center bg-[#8656cd] navbar-parent">
       {/* ------------------ wesite name -------------------  */}
-         <div className='text-2xl mx-2 text-white font-extrabold paisa'>
+         <div className='text-2xl mx-2 text-white font-extrabold money'>
             Finance Guru
         </div>
           
@@ -79,9 +77,6 @@ function Navbar({thememode,toggle,setUser,user,setFlag,flag}) {
         <div className="font-bold text-white hover:cursor-pointer " onClick={()=>{navigate("/groups")}}>Groups</div>
         <div className="font-bold text-white hover:cursor-pointer " onClick={()=>{navigate("/savings")}}>Savings</div>
         <div className="font-bold text-white hover:cursor-pointer " onClick={()=>{navigate("/charts")}}>Charts</div>
-        <div className="font-bold text-white hover:cursor-pointer " onClick={()=>{navigate("/stocks")}}>Stocks</div>
-        <div className="font-bold text-white hover:cursor-pointer " onClick={()=>{navigate("/vault")}}>Vault</div>
-        <div className="font-bold text-white hover:cursor-pointer lg:hidden" onClick={()=>{navigate("/inbox")}}>Inbox</div>
         <div className="inside font-bold text-white hover:cursor-pointer " onClick={()=>{Logout()}}>Logout</div>
         <div className="inside2 font-bold text-white hover:cursor-pointer " onClick={toggle} >Theme Toggle</div>
         
@@ -96,11 +91,6 @@ function Navbar({thememode,toggle,setUser,user,setFlag,flag}) {
  {/* ----------------- buttons + toggle ----------------  */}
 <div className='w-fit relative top-4 right-1 toggle-nav'>
   <ToggleBtn  thememode={thememode} toggle={toggle} /> 
-</div>
-<div className='font-bold text-white hover:cursor-pointer border-1 border-white p-3 profileIcon envelop' onClick={()=>{navigate("/inbox")}}>
-
-<FaRegEnvelope className="text-white cursor-pointer" />
-
 </div>
 
 <div className='font-bold text-white hover:cursor-pointer p-3 profileIcon ' onClick={()=>{navigate("/profile")}}>

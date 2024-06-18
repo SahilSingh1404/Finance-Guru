@@ -61,7 +61,6 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
       setFriendName(e.target.value)
     }
 
-    //generating random group join code logic
     const uuid = () => {
       var S4 = () => {
         return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -143,7 +142,6 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
     }
 
     useEffect(()=>{
-       //retrieving user data from local storage
         const check=async()=>{
             try{
               const loggedInUser = localStorage.getItem("user");

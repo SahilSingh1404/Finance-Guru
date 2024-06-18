@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import Card from 'react-bootstrap/Card';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
-import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
-import { AiTwotoneCalendar } from 'react-icons/ai';
 
 
 const BillCard = ({ billflag,setbillflag,user,BillData,thememode }) => {

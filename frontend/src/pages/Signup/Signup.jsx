@@ -19,7 +19,6 @@ function Signup({user,setUser})
   const [isPass,isPassValid]=useState(false)
   const [isUsername,isUsernameValid]=useState(false)
 
-//  -------------- function to handle password change ----------------------- 
   const handlePasswordChange = (event) => {
     event.preventDefault();
     const newPassword = event.target.value;
@@ -37,7 +36,6 @@ function Signup({user,setUser})
     setEmail(k);
  }
 
-//  -------------------- function to handle the username change ------------------ 
   const handleUsernameChange = (event) => {
     event.preventDefault();
     const newUsername = event.target.value;
@@ -55,7 +53,6 @@ function Signup({user,setUser})
    
     setConformpass("");
   }
-
 
   //Google OAuth function
   const googlelogin = (req,res)=>{
@@ -121,7 +118,6 @@ function Signup({user,setUser})
     }
   };
   
-  
   return (
     <form action="" onSubmit={submitFunction}>
       <div className="super-container">
@@ -132,11 +128,9 @@ function Signup({user,setUser})
           </div>
 
           <div className="content">
-         
             <div className="user-details">
-
               <div className="input-box">
-                <label htmlFor="uname">username</label>
+                <label htmlFor="uname">Username</label>
                 <input
                   type="text"
                   value={username}
@@ -159,7 +153,7 @@ function Signup({user,setUser})
                   onChange={handleEmail}
                   required
                 />
-              {console.log(email)}
+              {/* {console.log(email)} */}
               </div>
 
               <div className="input-box">

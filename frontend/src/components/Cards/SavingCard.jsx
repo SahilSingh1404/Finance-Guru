@@ -33,9 +33,6 @@ const handleSavingInput = (name) => (e) => {
   setSavingInput({ ...SavingInput, [name]: e.target.value });
 };
 
-
-// ----------------- submission ----------
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const editSavings = async () => {
@@ -89,7 +86,6 @@ const handleSavingInput = (name) => (e) => {
     <div className='flex flex-col justify-center items-start gap-8 w-full p-1 h-[300px]' style={{backgroundColor:thememode=="dark"?"":"white",color:thememode=="dark"?"white":"black",}}>
     
       <Card variant="light" border="secondary" className="w-full flex flex-col gap-3  rounded-lg border-2 h-40 p-1 " style={{backgroundColor:thememode=="dark"?"#3a3a3a":"white",border: thememode === "dark" ? "3px solid white" : "1px solid black",color: thememode=="dark"?"white":"black"}}>
-
 
         <Card.Header className=' font-semibold text-center text-lg flex justify-evenly bg-[#8656cd] '> <div>
          {props.title}</div></Card.Header>

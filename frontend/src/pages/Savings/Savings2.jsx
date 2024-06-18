@@ -1,8 +1,6 @@
 import React, { useState,useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
-// import { Button } from 'react-bootstrap';
-// import SavingCard from "../../components/Cards/SavingCard";
 import axios from "axios";
 import Navbar from '../../components/Navbar'
 import './Savings.css';
@@ -24,8 +22,6 @@ function Savings2({ user,setUser,thememode,toggle}) {
   const [savingData, setSavingData] = useState([]);
   const [updateFlag,setUpdateFlag] =useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
- //function to handle savings input
 
  const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -189,18 +185,18 @@ const currenciData = UCurrency(currenci);
         targetAmt: amount,
         Currency:Currency
       };
-      console.log(saving)
+      // console.log(saving)
       e.preventDefault()
       console.log('Currency data:', currenciData);
       const currencysmall = Currency.toUpperCase();
       console.log(currenciData[currencysmall]);
-      console.log(saving.currAmt)
+      // console.log(saving.currAmt)
       saving.currAmt =Math.floor(saving.currAmt / currenciData[currencysmall]);
-      console.log(saving.currAmt)
+      // console.log(saving.currAmt)
       saving.targetAmt =Math.floor(saving.targetAmt / currenciData[currencysmall]);
-      console.log(saving.targetAmt)
+      // console.log(saving.targetAmt)
       const res = await axios.post("http://localhost:3001/api/savings/addSaving", { saving });
-      console.log(res.data.saving);
+      // console.log(res.data.saving);
       const val = res.data.saving;
       setSavingData(prev => [...prev, val]);
       setInputTitle("");
@@ -210,17 +206,6 @@ const currenciData = UCurrency(currenci);
       console.log(err);
     } 
   };
-// adding saving badge
-  const savingbadge = 'JLLAW.png';
-  const addBadge=async(img)=>{
-    try{
-      console.log(img)
-      const res = await axios.post(`http://localhost:3001/api/user/addbadge/${user._id}`,{img})
-      console.log(res.data.user)
-    }catch(err){
-      console.log(err.response.data)
-    }
-  }
 
   useEffect(()=>{
     //function to retrieve user data from local storage
@@ -247,9 +232,7 @@ const currenciData = UCurrency(currenci);
         setSavingData(res.data.savings)
         const numberOfSavings = res.data.savings.filter(saving => saving.currAmt >= saving.targetAmt).length;
         console.log(numberOfSavings);
-        if(numberOfSavings===5){
-          addBadge(savingbadge)
-        }
+        
       }catch(err){
         console.log(err)
       }
@@ -263,7 +246,7 @@ const currenciData = UCurrency(currenci);
   const delsaving = async()=>{
     try{
         const res=await axios.delete(`http://localhost:3001/api/savings/deleteSaving/${selectedSavingId}`)
-        console.log(res.data)
+        // console.log(res.data)
         setUpdateFlag((prev)=>!(prev))
         handleCloseDeleteModal();
     }catch(err){
