@@ -132,18 +132,6 @@ function Profile({ user, thememode, toggle,setUser}) {
             <input type='text' value={user.email} readOnly />
           </label>
 
-           <div className='w-full text-xl font-bolder mb-2' style={{ color: thememode === 'dark' ? 'black' : 'black' }}>
-            Friends
-          </div>
-
-          {user?.friends?.map((friend, index) => (
-            <>
-              <div className='w-[30%] text-md p-1'>
-              </div>
-              <input type='text' id={`friend-${index}`} value={friend} readOnly />
-            </>
-          ))}
-
       <div
         className='flex flex-col mx-auto w-[50%] h-auto justify-start items-center p-3 gap-3 rounded-sm'
         style={{ backgroundColor: thememode === 'dark' ? 'rgb(195, 189, 189)' : 'white'}}

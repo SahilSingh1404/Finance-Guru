@@ -13,11 +13,8 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
     const theme = useTheme()
     const [showGroup, setShowGroup] = useState(false);
     const [showGroupJoin, setShowGroupJoin] = useState(false);
-    // const [showFriend, setShowFriend] = useState(false);
-    const [showAddFriend, setShowAddFriend] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [groupflag,setgroupflag] = useState(false)
-    const [friendName,setFriendName] = useState("")
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -46,19 +43,12 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
     const handleGroupJoinClose = () => setShowGroupJoin(false);
     const handleGroupJoinShow = () => setShowGroupJoin(true);
 
-    const handleAddFriendShow = () => setShowAddFriend(true);
-    const handleAddFriendClose = () => setShowAddFriend(false);
-
     //handling input
     const handleGroupInput = name=>e=>{
       setgroupInput({...groupInput,[name]:e.target.value})
     }
     const handleGroupJoinInput = name=>e=>{
       setjoincode({...joincode,[name]:e.target.value})
-    }
-    const handleAddFriendInput = (e)=>{
-      console.log(e.target.value)
-      setFriendName(e.target.value)
     }
 
     const uuid = () => {
@@ -80,18 +70,6 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
         S4()
       );
     };
-
-    //function to send friend request
-    const handleSendRequest = async()=>{
-      try{
-        const res= await axios.put(`http://localhost:3001/api/friend/sendRequest/${user._id}`,{friendName})
-        console.log(res)
-        alert(res.data.message)
-        setFriendName("")
-      }catch(err){
-        console.log(err)
-      }
-    }
 
     //create group function
     const handleSubmit =e=>{  
@@ -179,7 +157,7 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
         <div className='flex justify-between w-full'>
         <div>
         <div className='font-extrabold text-2xl mx-4 mt-4 dark:text-[#f0f0f0]'> Groups</div>
-        <div className='mx-4 text-gray-600 dark:text-gray-400 '>Invite friends, create groups and streamline bill splitting and debt settlements</div>
+        <div className='mx-4 text-gray-600 dark:text-gray-400 '>Create groups, join groups and streamline bill splitting and debt settlements</div>
         </div>
       
         <div>
@@ -217,9 +195,8 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
           },
         }}
       >
-        <MenuItem onClick={()=>{handleGroupShow();handleClose()}}>Create new group</MenuItem>
+        <MenuItem onClick={()=>{handleGroupShow();handleClose()}}>Create a new group</MenuItem>
         <MenuItem onClick={()=>{handleGroupJoinShow();handleClose()}}>Join Group</MenuItem>
-        <MenuItem onClick={()=>{handleAddFriendShow();handleClose()}}>Invite a friend</MenuItem>
       </Menu>
     </div>
 
@@ -287,24 +264,6 @@ export const Main = ({user,setUser,thememode,toggle,groupData,setgroupData}) => 
         </Modal.Footer>
       </Modal>
 
-       {/* ADD FRIEND MODAL */}
-      <Modal show={showAddFriend} onHide={handleAddFriendClose} animation={false} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Friend</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <label htmlFor='friendName'>Enter Username of friend: </label>
-            <input type="text" 
-                   name='friendName'
-                   value={friendName}
-                   onChange={handleAddFriendInput}
-                   required
-                   ></input>
-        </Modal.Body>
-        <Modal.Footer>
-          <button className="bg-[#000080] p-2 rounded-md text-white" onClick={handleSendRequest}  required>Invite</button>
-        </Modal.Footer>
-      </Modal>
         </div>
 
     </div>

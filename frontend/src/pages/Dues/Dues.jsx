@@ -317,8 +317,9 @@ return (
             >
               <option value="">Select</option>
               <option value="daily">Daily</option>
-              <option value="monthly">Monthly</option>
               <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              
             </select> 
           </div>
           {errorMessageAdd && <p className="text-red-500">{errorMessageAdd}</p>}

@@ -19,8 +19,6 @@ const ITEM_HEIGHT = 48;
 const GroupCard = ({key,setgroupData,groupData,allgroupsdata,setSelectedGroup, selectedGroup,thememode,toggle,user,setgroupflag}) => {
   const navigate = useNavigate()
   const theme = useTheme();
-const [showAddFriend, setShowAddFriend] = useState(false);
-const [friends,setFriends] = useState([])
 const [showDeleteModal,setShowDeleteModal] = useState(false);
 const [checkedState, setCheckedState] = useState(
 new Array(user.friends.length).fill(false)
@@ -41,29 +39,6 @@ const handleOnChange = (position) => {
 
   setCheckedState(updatedCheckedState);
  
-}
-
-useEffect(()=>{
-  checkedState.map((item,index)=>{
-    if(item===true)setFriends(prev=>[...prev,user.friends[index]])
-})
-},[checkedState])
-
-const handleAddFriendsToGroup=async()=>{
-  try{
-    console.log(friends)
-    const res = await axios.put(`http://localhost:3001/api/group/addfriendsgroup/${groupData._id}`,{friends})
-    console.log(res.data)
-    handleAddFriendClose()
-
-  }catch(err){
-    console.log(err)
-  }
-}
-const handleAddFriendClose = () => setShowAddFriend(false);
-const handleAddFriendShow = () => {
-  handleCloseDots()
-  setShowAddFriend(true);
 }
 
 const handleDelete = async()=>{
@@ -133,9 +108,6 @@ console.log(allgroupsdata)
           },
         }}
       >
-           <MenuItem key="addfriend" onClick={()=>{handleAddFriendShow();handleCloseDots()}}>
-          + Add member
-          </MenuItem>
           <MenuItem key="deletegroup" onClick={()=>{handleopendeletemodal();handleCloseDots();}}>
           Delete group
           </MenuItem>
@@ -155,39 +127,6 @@ console.log(allgroupsdata)
         >Settle transactions⟶</Buttonmui>
       </CardActions>
     </Card>
-
-    <Modal show={showAddFriend} onHide={handleAddFriendClose} animation={false} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Select friends to be added</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <ul className="friends-list">
-        {user.friends.map((name, index) => {
-          return (
-            <li key={index}>
-              <div className="toppings-list-item h-8 align-middle">
-                <div className="left-section flex px-4 align-middle">
-                  <input
-                    type="checkbox"
-                    id={`custom-checkbox-${index}`}
-                    name={name}
-                    value={name}
-                    checked={checkedState[index]}
-                    onChange={() => handleOnChange(index)}
-                    className='flex justify-start w-4 align middle'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                  />
-                  <label htmlFor={`custom-checkbox-${index}`} className='flex align-middle m-2'>{name}</label>
-                </div>
-              </div>
-            </li>
-          );
-        })}
-        </ul>
-        </Modal.Body>
-        <Modal.Footer>
-          <button className="rounded-md p-1 text-white w-full bg-[#000080]" onClick={handleAddFriendsToGroup}  required>Add to group</button>
-        </Modal.Footer>
-      </Modal>
 
       <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
               <Modal.Header closeButton>

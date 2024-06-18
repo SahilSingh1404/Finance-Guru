@@ -387,7 +387,7 @@ const DeleteConfirmation = (id) => {
                 </div>
                 <div>
                   <label className="font-bold text-sm">Current Amount</label>
-                  <input type="date" className="border border-gray-300 p-2 rounded w-full text-sm" value={sav.currAmt} onChange={handleSaving('currAmt')} />
+                  <input type="number" className="border border-gray-300 p-2 rounded w-full text-sm" value={sav.currAmt} onChange={handleSaving('currAmt')} />
                 </div>
                 <div>
                   <label className="font-bold text-sm">Target Amount</label>

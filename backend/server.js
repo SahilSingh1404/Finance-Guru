@@ -7,7 +7,6 @@ import savingroutes from './routes/savings.js';
 import billsRoutes from './routes/bills.js';
 import userroutes from './routes/user.js';
 import grouproutes from './routes/groups.js'
-import friendroutes from './routes/friends.js'
 import bodyParser from 'body-parser'
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -26,7 +25,6 @@ app.use("/api/savings",savingroutes)
 app.use("/api/auth",authroutes)
 app.use("/api/user",userroutes)  
 app.use("/api/group",grouproutes)
-app.use("/api/friend",friendroutes)
 
 app.use((err,req,res,next)=>{
     const status = err.status||500;

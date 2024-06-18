@@ -75,7 +75,7 @@ function ResponsiveAppBar({thememode,toggle,setUser,user,setFlag,flag}) {
 
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src="logo.png" style={{height:"50px",marginRight:"20px"}} alt="NO img"/>
+          {/* <img src="logo.png" style={{height:"50px",marginRight:"20px"}} alt="NO img"/> */}
           <Typography
           className='heading'
             variant="h6"

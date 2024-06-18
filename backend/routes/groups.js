@@ -1,10 +1,9 @@
 import express from "express";
-import { creategroup,joingroup,getgroups,getmembers,splitBill, markPaid, markApproved,deleteGroup, simplifyDebt, approveDebt, getDebts,getgroup,addComment,getAllComments, addFriendsToGroup} from "../controllers/groups.js";
+import { creategroup,joingroup,getgroups,getmembers,splitBill, markPaid, markApproved,deleteGroup, simplifyDebt, approveDebt, getDebts,getgroup,addComment,getAllComments} from "../controllers/groups.js";
 
 const router = express.Router();
 router.post("/creategroup",creategroup)
 router.post("/joingroup",joingroup)
-router.put("/addfriendsgroup/:id",addFriendsToGroup)
 router.get("/getgroups/:id",getgroups)
 router.get("/getgroup/:id",getgroup)
 router.get("/getmembers/:id",getmembers)

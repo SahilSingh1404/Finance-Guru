@@ -10,7 +10,6 @@ import TransactionCard from './components/Cards/TransactionCard.jsx';
 import Dues from "./pages/Dues/Dues"
 import Chart from './pages/Chart/Chart';
 import { Main } from './pages/Groups/Main';
-import ToggleBtn from './components/Navbar/ToggleBtn.jsx';
 import Savings2 from './pages/Savings/Savings2';
 import SimplifyDebt from './pages/Groups/SimplifyDebt.jsx'
 import Grouphome from './pages/Groups/Grouphome.jsx';
@@ -19,9 +18,6 @@ import Profile from './pages/Profile/Profile.jsx';
 function App() {
   const [user,setUser]=useState({})
   const [groupData,setgroupData]=useState([])
-
-  // console.log(user)
-
   const storedTheme = localStorage.getItem('theme');
   const [thememode, setThememode] = useState(storedTheme || 'light');
 
@@ -72,7 +68,6 @@ function App() {
           <Route path="/groups" element={<Main user={user} thememode={thememode} toggle={toggle} groupData={groupData} setgroupData={setgroupData} />} />
           <Route path="/billsplit/:id" element={<Grouphome user={user} thememode={thememode} toggle={toggle}/>}/>
           <Route path="/simplifydebt/:id" element={<SimplifyDebt user={user} thememode={thememode} toggle={toggle}/>}/>
-          <Route path="/btn" element={<ToggleBtn thememode={thememode} toggle={toggle}/>}/>
           <Route path="/save" element={<Savings2 user={user} thememode={thememode} toggle={toggle} />} />
           <Route path='/simplify' element={<SimplifyDebt user={user} thememode={thememode} toggle={toggle}/>}/>
           <Route path="/profile" element={<Profile user={user} thememode={thememode} toggle={toggle} setUser={setUser}/>} />

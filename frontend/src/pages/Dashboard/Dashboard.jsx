@@ -1,21 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import Navbar from '../../components/Navbar'
-import {Button} from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios"
 import TransactionCard from '../../components/Cards/TransactionCard';
-import { CSVLink, CSVDownload } from "react-csv"
-import { useTranslation,initReactI18next } from "react-i18next"; 
-import i18next from "i18next"
+import { CSVLink } from "react-csv"
 import './Dashboard.css'
-const languages = [
-  { value: "", text: "Options" },
-  { value: "en", text: "English" },
-  { value: "hi", text: "Hindi" },
-];
 
 const Dashboard = ({user,thememode,toggle,setUser}) => {
-  const [lang, setLang] = useState("en");
   const [updateFlag, setUpdateFlag] = useState(false); 
   const [show,setShow] = useState(false)
   // console.log(user)
@@ -43,12 +34,9 @@ const Dashboard = ({user,thememode,toggle,setUser}) => {
     console.log(filteredData)
     const [uniqueCategories, setUniqueCategories] = useState([]);
     const [stats,setStats] = useState({})
-    const bigincome = 'BadeLog.png'
-    const bigexpense = 'AAKR.png'
     const [incomeshow,setIncomeshow] = useState(false)
     const [expenseshow,setExpenseshow] = useState(false)
     
-    // console.log(uniqueCategories)
     const headers = [
       { label: "Transaction Type", key: "type" },
       { label: "Amount", key: "amount" },
@@ -63,24 +51,21 @@ const Dashboard = ({user,thememode,toggle,setUser}) => {
     //functions to handle modal visibility
     const handleClose = () => {setShow(false);setErrorMessage("")};
     const handleShow = () => setShow(true);
-
     const handleIncomeClose = () => setIncomeshow(false);
     const handleIncomeShow = () => setIncomeshow(true);
     const handleExpenseClose = () => setExpenseshow(false);
     const handleExpenseShow = () => setExpenseshow(true);
 
      //functions to handle input
-    const handleTransInput = name=>(e)=>{
-      if(name=='type' ||name=='category'||name=='desc'){
+     const handleTransInput = (name) => (e) => {
+      if (name === 'category' || name === 'desc') {
         const capitalizedValue = capitalizeFirstLetter(e.target.value);
-        setTransInput({...transInput,[name]:capitalizedValue})
-        console.log(name)
+        setTransInput({ ...transInput, [name]: capitalizedValue });
+      } else {
+        setTransInput({ ...transInput, [name]: e.target.value });
       }
-      else{
-        setTransInput({...transInput,[name]:e.target.value})
-        console.log(name)
-      }
-    }
+      console.log(name, e.target.value);
+    };
 
     const capitalizeFirstLetter = (string) => {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -132,19 +117,6 @@ console.log(datat)
       }
       addFilter()
     }
-
-    //function to send mail
-      const mailsend=async()=>{
-        try{
-          const reqmail = user.email
-          console.log(reqmail)
-          const res = await axios.post("http://localhost:3001/api/mail/sendmail",{reqmail})
-          .then(() => alert("Message Sent Succesfully"))
-          .catch((err) => console.log(err));
-        }catch(err){
-          console.log(err.response.data)
-        }
-      }
 
       //function to handle multiple currencies
       
@@ -230,10 +202,6 @@ console.log(datat)
       const categoriesSet = new Set(transactionData.map(transaction => transaction.category));
       setUniqueCategories([...categoriesSet]);
     },[updateFlag,transactionData]);
-
-     // Replace with your dynamic currency value
-    const currencyData = UCurrency('inr');
-    // console.log(currencyData['usd'])
     
     const handleSubmit = async(e)=>{
       e.preventDefault()
@@ -270,21 +238,18 @@ console.log(datat)
       }
     }
     addTrans()
-    
-    mailsend()
-   
   }
   
 
   return (
-    <div style={{backgroundColor:thememode=="dark"?"#181818":"#f0f0f0"}}>
+    <div style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}}>
         <Navbar thememode={thememode} toggle={toggle}/>
       <div className='font-extrabold text-2xl mx-4 mt-2 px-6 dark:text-[#f0f0f0]'>Welcome, {user.username}!</div>
       <div className='mt-2 mx-4 px-6 text-gray-600 dark:text-gray-400'>Let's add some transactions!</div>
 
      <div className='h-full flex flex-col justify-center items-start '>
        
-          <div className='flex w-[99vw] justify-evenly items-center h-20 p-4  d-parent' style={{backgroundColor:thememode=="dark"?"#181818":"#f0f0f0"}}>
+          <div className='flex w-[99vw] justify-evenly items-center h-20 p-4  d-parent' style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}}>
 
             <div className='  w-60 rounded-md flex flex-col justify-center bg-[#000080] h-10 text-white items-center chill'>
              <div className='flex  justify-between p-4 font-bold gap-6'>
@@ -332,7 +297,7 @@ console.log(datat)
         {/* -----------------------Filters------------------------ */}
         <div className='grid grid-cols-3'>
         <div className='col-span-1'>
-        <div className='flex-col px-6 py-4 justify-center items-center h-[100%] filter mx-4 w-fit' style={{backgroundColor:thememode=="dark"?"#181818":"#f0f0f0"}}>
+        <div className='flex-col px-6 py-4 justify-center items-center h-[100%] filter mx-4 w-fit' style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}}>
               <label for="category" className='px-2 pb-2 dark:text-white'>Category:</label>
               <select className='mx-2 border-2 rounded-md p-3 category-all w-full' name="category" id="category" selected="All" onChange={handleFilterInput('category')} value={filterInput.category}>
                 <option value="">All Categories</option>
@@ -357,7 +322,7 @@ console.log(datat)
         {/* -------------------------------Listing Transaction Cards below filter bar---------------------------- */}
       <div className='h-[95%] w-full flex flex-col align-middle col-span-2'> 
         <div style={{width:"100%"}} className='overflow-y-scroll'>
-          {(filterstate==false ? transactionData : filteredData)?.map(trans=>(
+          {(filterstate===false ? transactionData : filteredData)?.map(trans=>(
             <TransactionCard user={user} key={trans._id} transactionData={trans} thememode={thememode} toggle={toggle} setTransactionData={setTransactionData} setUpdateFlag={setUpdateFlag}/> 
             ))}
         </div>
@@ -376,17 +341,18 @@ console.log(datat)
         <Modal.Body>
             {/* Add transaction input section */}
             <label htmlFor="type">Transaction type: </label>
-            <select name="type" 
-                    id="type"  
-                    value={type}
-                    onChange={handleTransInput('type')}
-                    className='px-1 border-1 py-1 mx-2 rounded-md'
-                    required
-                    >
-            <option value="">Select</option>    
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
-            </select><br/>
+            <select
+  name="type"
+  id="type"
+  value={type}
+  onChange={handleTransInput('type')}
+  className='px-1 border-1 py-1 mx-2 rounded-md'
+  required
+>
+  <option value="">Select</option>
+  <option value="expense">Expense</option>
+  <option value="income">Income</option>
+</select><br/>
 
             <label htmlFor='currency'>Currency: </label>
             <select
@@ -397,7 +363,7 @@ console.log(datat)
                     className='px-1 border-1 py-1 mx-2 rounded-md'
                     required
                   >
-                    <option>select:</option>
+                    <option>Select:</option>
                     <option value="inr">inr</option>
                     <option value="usd">usd</option>
                     <option value="eur">eur</option>
