@@ -136,9 +136,6 @@ console.log(allgroupsdata)
            <MenuItem key="addfriend" onClick={()=>{handleAddFriendShow();handleCloseDots()}}>
           + Add member
           </MenuItem>
-          {/* <MenuItem key="editgroup" onClick={()=>{handleShow();handleCloseDots();}}> */}
-          {/* Edit group */}
-          {/* </MenuItem> */}
           <MenuItem key="deletegroup" onClick={()=>{handleopendeletemodal();handleCloseDots();}}>
           Delete group
           </MenuItem>

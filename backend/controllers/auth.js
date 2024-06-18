@@ -1,11 +1,8 @@
-import mongoose from "mongoose";
 import User from  "../models/user.js"
 import bcrypt from "bcryptjs";
 import  jwt  from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
-import { validationResult } from "express-validator";
  
 const jwtSecret=process.env.JWT
 export const ErrorMessage = (status,message)=>{
@@ -17,8 +14,6 @@ export const ErrorMessage = (status,message)=>{
 
 export const signup = async (req, res, next) => {
   try {
-    // console.log("Signup Request Body:", req.body);
-
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 

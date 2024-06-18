@@ -48,10 +48,10 @@ console.log(groupData)
     const getgroup=async()=>{
       try{
         const res = await axios.get('http://localhost:3001/api/group/getgroup/${id}')
-        console.log(res.data)
+        // console.log(res.data)
         setgroupData(res.data)
         setBillSplitData(res.data.billSplit)
-        console.log("use effect",groupData)
+        // console.log("use effect",groupData)
       }catch(err){
         console.log(err)
       }
@@ -63,7 +63,7 @@ console.log(groupData)
       setApproved(prev=>!prev)
       setBillSplitData(res.data.billSplit)
       getgroup()
-      console.log(res.data.billSplit)
+      // console.log(res.data.billSplit)
     }catch(err){
       console.log(err)
     }
@@ -78,7 +78,7 @@ console.log(groupData)
     const getMembers = async()=>{
       try{
         const res = await axios.get('http://localhost:3001/api/group/getmembers/${groupData._id}')//add user Id
-        console.log("members",res.data)
+        // console.log("members",res.data)
         setmembersdata(res.data)
       }catch(err){
         console.log(err)

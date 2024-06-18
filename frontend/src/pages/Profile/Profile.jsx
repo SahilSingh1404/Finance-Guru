@@ -79,20 +79,6 @@ function Profile({ user, thememode, toggle,setUser}) {
     setShow(prev=>!prev)
   }
 
-  const [badges, setBadges] = useState([]);
-  React.useEffect(() => {
-    const getBadges = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/api/user/getBadges/${user._id}`);
-        setBadges(response.data.badges);
-        console.log(response.data.badges)
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getBadges();
-  }, [user._id]);
-
   return (
     <div style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}}>
       <Navbar thememode={thememode} toggle={toggle} flag={flag} setFlag={setFlag}/>
@@ -146,12 +132,10 @@ function Profile({ user, thememode, toggle,setUser}) {
             <input type='text' value={user.email} readOnly />
           </label>
 
-           {/* Subheading for Friends */}
            <div className='w-full text-xl font-bolder mb-2' style={{ color: thememode === 'dark' ? 'black' : 'black' }}>
             Friends
           </div>
 
-          
           {user?.friends?.map((friend, index) => (
             <>
               <div className='w-[30%] text-md p-1'>
@@ -164,18 +148,8 @@ function Profile({ user, thememode, toggle,setUser}) {
         className='flex flex-col mx-auto w-[50%] h-auto justify-start items-center p-3 gap-3 rounded-sm'
         style={{ backgroundColor: thememode === 'dark' ? 'rgb(195, 189, 189)' : 'white'}}
       >
-        <div className='w-full text-xl font-bolder mb-2 flex justify-center ' style={{ color: thememode === 'dark' ? 'black' : 'black' }}>
-          Badges
-        </div>
         <div className='flex flex-warp'>
-        {badges?.map((badge, index) => (
-          <img
-          key={index}
-          src={badge}
-          alt={`Badge ${index + 1}`}
-          className='w-32 h-32 m-2 object-cover'
-        />
-        ))}
+        
         </div>
       </div>
         </div>

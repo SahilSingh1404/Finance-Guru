@@ -16,10 +16,6 @@ function Login({user,setUser}) {
   const [isUsernameValid, setIsUsernameValid] = useState(false);
   const [allEntry, setAllEntry] = useState([]);
   // const [validEmail,setValidemail]=useState(false)
-  const emailValidation= (email) => {  
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-  };
 
   //function to handle input
   const handlePasswordChange = (event) => {
@@ -35,13 +31,6 @@ function Login({user,setUser}) {
     setUsername(newUsername);
     setIsUsernameValid(newUsername.length >= 5);
   };
-
-  const handleEmail=(event)=>{
-     const k=event.target.value;
-     setEmail(k);
-
-  }
-  
 
   const submitFunction = (event) => {
     event.preventDefault(); 
@@ -88,7 +77,6 @@ function Login({user,setUser}) {
    
   return (
     <>
-
     <form onSubmit={submitFunction}>
       <div className="super-container">
       <div className="container-login">

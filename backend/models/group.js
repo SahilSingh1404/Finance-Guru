@@ -5,16 +5,16 @@ const groupSchema = new mongoose.Schema({
         type:String,
     },
     userId:{
-        type:String,//group creator
+        type:String,
     },
     members:{
-        type:[String],//userId of members
+        type:[String],
     },
     comments:{
-        type:[Object],//userId and his/her message
+        type:[Object],
     },
     title:{
-        type:String,//group title
+        type:String,
     },
     billSplit:{
         type:[Object]

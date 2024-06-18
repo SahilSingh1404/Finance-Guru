@@ -32,7 +32,6 @@ const Chart = ({user,setUser,thememode,toggle}) => {
           }
           check()
        
-      //fetching previous week's transaction data
        const getWeeklyData = async()=>{
         try{
             const res = await axios.get(`http://localhost:3001/api/transactions/getWeeklyTransaction/${user._id}`)
@@ -44,7 +43,6 @@ const Chart = ({user,setUser,thememode,toggle}) => {
         }
        } 
 
-       //fetching monthly transaction data
        const getMonthlyData = async()=>{
         try{
             const res = await axios.get(`http://localhost:3001/api/transactions/getMonthlyTransaction/${user._id}`)
@@ -56,7 +54,6 @@ const Chart = ({user,setUser,thememode,toggle}) => {
         }
        } 
 
-       //fetching yearly transaction data
        const getYearlyData = async()=>{
         try{
             const res = await axios.get(`http://localhost:3001/api/transactions/getYearlyTransaction/${user._id}`)
@@ -67,22 +64,17 @@ const Chart = ({user,setUser,thememode,toggle}) => {
         }
        } 
 
-       //fetching category-wise transactions
        const getCategory = async()=>{
         try{
           const res= await axios.get(`http://localhost:3001/api/transactions/getCategoryWiseTransaction/${user._id}`)
           const result = res.data
           setCategoryData(res.data)
-          // Array of all categories
           const allCategories = result.map(item => item._id);
           setAllCategories(allCategories)
-          console.log(allCategories)
 
-          // Array of expenses for all categories
           const expenseArray = result.map(item => item.totalExpense);
           setExpenseArray(expenseArray)
 
-          // Array of income for all categories
           const incomeArray = result.map(item => item.totalIncome);
           setIncomeArray(incomeArray)
         }catch(err){
@@ -95,8 +87,6 @@ const Chart = ({user,setUser,thememode,toggle}) => {
        getCategory()
     },[user._id])
     console.log(allCategories)
-
-    
 
   return (
     <div className='' style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}} >
@@ -121,14 +111,11 @@ const Chart = ({user,setUser,thememode,toggle}) => {
         <YearlyChart yearlyData={yearlyData} thememode={thememode}/>
         </div>
     </div>
-
-
    
         {/* ---------------------------------------------------------Category chart---------------------------------------------------------- */}
         <div className='flex align-middle'>
           <CategoryChart categoryData={categoryData} allCategories={allCategories} thememode={thememode} toggle={toggle}/>
         </div>
-        
        </div>
        </div>
      </div>

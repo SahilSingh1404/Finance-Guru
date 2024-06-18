@@ -1,10 +1,5 @@
-import mongoose from "mongoose";
 import user from "../models/user.js"
 import group from "../models/group.js";
-import bcrypt from "bcryptjs";
-import  jwt  from "jsonwebtoken";
-import cookieParser from "cookie-parser";
-import { validationResult } from "express-validator";
 import Splitwise from 'splitwise-js-map';
 
 export const  creategroup= async(req,res)=>{
@@ -194,8 +189,6 @@ export const markApproved = async (req, res) => {
     }
 };
 
-
-
 export const simplifyDebt = async(req,res)=>{
   const debts = req.body.outputArray
   // console.log("debts",debts)
@@ -262,8 +255,6 @@ export const deleteGroup = async (req, res) => {
     }
   };
   
-
-
 export const approveDebt = async (req, res) => {
     const id = req.params.id;
     const arr = req.body;
@@ -353,7 +344,6 @@ export const getAllComments = async (req, res) => {
   }
 };
 
-
   export const addFriendsToGroup = async(req,res)=>{
     const id=req.params.id//group id
     const friends = req.body.friends//array of usernames of friends
@@ -388,7 +378,6 @@ export const getAllComments = async (req, res) => {
     res.status(200).json(updatedGroup);
 
     }catch(err){
-      // console.log(err);
       res.status(500).json({ error: 'Internal Server Error' });
 
     }

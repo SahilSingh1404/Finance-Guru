@@ -17,11 +17,10 @@ import Grouphome from './pages/Groups/Grouphome.jsx';
 import Profile from './pages/Profile/Profile.jsx';
 
 function App() {
-
   const [user,setUser]=useState({})
   const [groupData,setgroupData]=useState([])
 
-  console.log(user)
+  // console.log(user)
 
   const storedTheme = localStorage.getItem('theme');
   const [thememode, setThememode] = useState(storedTheme || 'light');

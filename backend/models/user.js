@@ -16,9 +16,6 @@ const userSchema = new mongoose.Schema({
         unique:true,
         trim:true
     },
-    stocks:{
-        type:[Object],
-    },
     files:{
         type:[Object],
     },
@@ -34,15 +31,9 @@ const userSchema = new mongoose.Schema({
     receivedRequests:{
         type:[String]
     },
-    inbox:{
-        type:[String]
-    },
     image:{
         type: String,
         default:null
-    },
-    badges:{
-        type:[String]
     },
     token:{
         type:String

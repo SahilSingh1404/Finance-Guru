@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus,faMinus } from '@fortawesome/free-solid-svg-icons';
 import './Dues.css'
 import axios from "axios";
-import BillCard from "../../components/Cards/BillCard.jsx"
 import Navbar from '../../components/Navbar.jsx'
-import ToggleBtn from '../../components/Navbar/ToggleBtn.jsx';
 import Table from 'react-bootstrap/Table';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import Modal from 'react-bootstrap/Modal';
-import { Button } from 'react-bootstrap';
 
 function Dues({ user, thememode, toggle,setUser }) {
   const [billflag,setbillflag] = useState(false)
@@ -29,20 +24,12 @@ function Dues({ user, thememode, toggle,setUser }) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  const [filterInput, setFilterInput] = useState({
-    userId: user._id,
-    category: '',
-    startDate: '',
-    endDate: '',
-  });
-
-  const [deleteDiv, setdeleteDiv] = useState(false);
   const [BillData, setBillData] = useState([]);
   const [errorMessageAdd, setErrorMessageAdd] = useState("");
   console.log(BillData)
     // ---------------input ----------------------- 
   const handleBillInput = (name) => (e) => {
-    if(name=='title' ||name=='toWhom'){
+    if(name==='title' ||name==='toWhom'){
       const capitalizedTitle = capitalizeFirstLetter(e.target.value);
       setdueItem({ ...dueItem, [name]: capitalizedTitle });
     }
@@ -50,39 +37,13 @@ function Dues({ user, thememode, toggle,setUser }) {
       setdueItem({ ...dueItem, [name]: e.target.value });
     }
   };
-  //  --------------handling filter input --------------- 
-  const handleFilterInput = (name) => (e) => {
-    setFilterInput({ ...filterInput, [name]: e.target.value });
-  };
-  // -----------------function to manage mails ------------------- 
-  const mailsendstart = async () => {
-    try {
-      const reqmail = user.email;
-      console.log(reqmail);
-      const res = await axios.post('http://localhost:3001/api/mail/sendstartmail', { reqmail });
-      alert('Message Sent Successfully');
-    } catch (err) {
-      console.error('Error sending start mail:', err);
-    }
-  };
-  const mailsendrecurring = async (recurring) => {
-    try {
-      const reqmail = user.email;
-      const duedate = dueItem.dueDate;
-      const recurring = dueItem.recurring
-      console.log(reqmail);
-      const res = await axios.post('http://localhost:3001/api/mail/sendmailrecurring', { reqmail, duedate, recurring });
-      alert('Message Sent Successfully');
-    } catch (err) {
-      console.error('Error sending recurring mail:', err);
-    }
-  };
+  
 // ----------------------- Submit ------------------- 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const currencysmall = dueItem.currency.toUpperCase();
     dueItem.amount =Math.floor(dueItem.amount / currenciData[currencysmall]);
-    if(dueItem.amount==''||dueItem.currency===''||dueItem.dueDate===''||dueItem.recurring===''||dueItem.title===''||dueItem.toWhom===''||dueItem.userId===''){
+    if(dueItem.amount===''||dueItem.currency===''||dueItem.dueDate===''||dueItem.recurring===''||dueItem.title===''||dueItem.toWhom===''||dueItem.userId===''){
       setErrorMessageAdd("All entries should be filled");
       return ;
     }
@@ -91,14 +52,9 @@ function Dues({ user, thememode, toggle,setUser }) {
       console.log(res.data);
       const val = res.data.bill;
       setBillData((prev) => [...prev, val]);
-      mailsendstart();
-      const currdate = new Date();
       const dueDateStr = dueItem.dueDate;
       const duedate = new Date(dueDateStr);
-      const oneDayInMillis = 24 * 60 * 60 * 1000;
-      if (currdate.getFullYear() === duedate.getFullYear() && currdate.getMonth() === duedate.getMonth() && currdate.getDate() === duedate.getDate() && currdate.getTime() + oneDayInMillis === duedate.getTime()) {
-        mailsendrecurring(dueItem.recurring);
-      }
+      
       setdueItem({
         title: '',
         dueDate: '',
@@ -181,7 +137,7 @@ const {titleedit, amountedit, toWhomedit, dueDateedit } = Bill;
 
 const handleBill = (name) => (e) => {
   // setBill({ ...Bill, [name]: e.target.value });
-  if(name=='titleedit' ||name=='toWhomedit'){
+  if(name==='titleedit' ||name==='toWhomedit'){
     const capitalizedTitle = capitalizeFirstLetter(e.target.value);
     setBill({ ...Bill, [name]: capitalizedTitle });
   }
@@ -262,11 +218,11 @@ const handleCloseDeleteModal=()=>{
 
 
 return (
-  <div style={{backgroundColor:thememode=="dark"?"#181818":"#f0f0f0"}}>
+  <div style={{backgroundColor:thememode==="dark"?"#181818":"#f0f0f0"}}>
    <Navbar thememode={thememode} toggle={toggle}/> 
     <div className="outer min-h-screen w-full" style={{ backgroundColor: thememode === 'dark' ? '#181818' : '#f0f0f0'}}>
       <div className='font-extrabold text-5xl mx-4 mt-4 dark:text-[#f0f0f0]'>Bills and Dues</div>
-      <div className='mx-4 text-gray-600 dark:text-gray-400'>Manage your recurring bills and dues here. Receive reminders through email</div>
+      <div className='mx-4 text-gray-600 dark:text-gray-400'>Manage your recurring bills and dues here.</div>
       <div className="hero-section h-full">
         <div className="hero-left " style={{ borderColor: thememode === 'dark' ? '#000080' : '#000080',backgroundColor: thememode === 'dark' ? '#2c3034' : 'white'}}>
           <div className="due flex justify-between w-full gap-4 ">
@@ -374,7 +330,7 @@ return (
       <div className="hero-right h-full">
         <div className="storing-dues">
           <div className="overflow-y-scroll w-full max-h-[500px]">
-          <Table striped borderless hover variant={thememode == 'dark' ? 'dark' : ''}>
+          <Table striped borderless hover variant={thememode === 'dark' ? 'dark' : ''}>
             <thead>
               <tr>
                 <th>Pay To</th>
